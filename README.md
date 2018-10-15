@@ -26,7 +26,8 @@ RUN yum update -y && yum install -y curl wget net-tools vim
 # 
 
 # Installation de Meteor
-
+# curl https://install.meteor.com/ | sh
+# sh -c "$(curl -sSL https://install.meteor.com/)"
 
 ```
 Et le listing `./construction/conteneur-ide/point-d-entree.sh` : 
