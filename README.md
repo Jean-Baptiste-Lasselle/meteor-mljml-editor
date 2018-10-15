@@ -47,8 +47,40 @@ Je peux aussi chercher une façon de trier la lsite et déduire automatiquement,
 ### Mieux
 
 ```bash
-jibl@pc-alienware-jib:~$ # git ls-remote --tags https://github.com/creationix/nvm|awk -F / '{print $3}'|awk -F ^ '{print $1}' >> liste-versions-avec-v.kytes 
-jibl@pc-alienware-jib:~$ # while read iterateur; do   iterateur=${iterateur#"v"} ; echo "$iterateur" >> ./liste-versions-NVM-a-trier-$(date '+%Y-%m-%dday_%Hh-%Mmin-%Ssec').kytes; done <./liste-versions-avec-v.kytes 
-jibl@pc-alienware-jib:~$ 
+export HORODATAGE_OPS=$(date '+%Y-%m-%dday_%Hh-%Mmin-%Ssec')
 
+# On récupère d'abord la liste exhaustive des versions de NVM, soit les tags du repo ofiicle NVM.
+git ls-remote --tags https://github.com/creationix/nvm| grep -v {|awk -F / '{print $3}'|awk -F ^ '{print $1}' >> liste-versions-avec-v.kytes
+
+# On se débarasse des métadonnées pour ne garder par ligne, que le strict numéro de version, préfixé de la lettre "v" (les tags du repo officiel NVM sont ainsi préfixés...) :  
+while read iterateur; do   iterateur=${iterateur#"v"} ; echo "$iterateur" >> ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes; done <./liste-versions-avec-v.kytes 
+
+# À ce stade, on a généré un fichier qui contient la liste de toutes les versions de NVM, en syntaxe semver.
+# On va donc maintenant trier cette liste, pour en retirer la dernière et l'avant dernière entrée : 
+export DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 1 | head -n 1)
+export AVANT_DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 2 | head -n 1)
+
+# Maintenant, on va installer NVM dans son avant dernière version (petite habitude d'ingénierie, l'avant dernière a tout de même une maturité, la denrière est trop jeune)
+
+curl "https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh" | bash
+```
+Un test qui a  fonctionné : 
+
+```bash
+jibl@pc-alienware-jib:~$ git ls-remote --tags https://github.com/creationix/nvm| grep -v {|awk -F / '{print $3}'|awk -F ^ '{print $1}' >> liste-versions-avec-v.kytes 
+jibl@pc-alienware-jib:~$ rm -f liste-versions-NVM-a-trier-2018-10-16day_01h-19min-19sec.kytes 
+jibl@pc-alienware-jib:~$ while read iterateur; do   iterateur=${iterateur#"v"} ; echo "$iterateur" >> ./liste-versions-NVM-a-trier-$(date '+%Y-%m-%dday_%Hh-%Mmin-%Ssec').kytes; done <./liste-versions-avec-v.kytes 
+jibl@pc-alienware-jib:~$ sort --version-sort ./liste-versions-NVM-a-trier-2018-10-16day_01h-38min-13sec.kytes | tail -n 2 | head -n 10.33.10
+jibl@pc-alienware-jib:~$ sort --version-sort ./liste-versions-NVM-a-trier-2018-10-16day_01h-38min-13sec.kytes | tail -n 1 | head -n 1
+0.33.11
+jibl@pc-alienware-jib:~$ sort --version-sort ./liste-versions-NVM-a-trier-2018-10-16day_01h-38min-13sec.kytes | tail -n 3 | head -n 1
+0.33.9
+jibl@pc-alienware-jib:~$ sort --version-sort ./liste-versions-NVM-a-trier-2018-10-16day_01h-38min-13sec.kytes | tail -n 4 | head -n 1
+0.33.8
+jibl@pc-alienware-jib:~$ sort --version-sort ./liste-versions-NVM-a-trier-2018-10-16day_01h-38min-13sec.kytes | tail -n 4 
+0.33.8
+0.33.9
+0.33.10
+0.33.11
+jibl@pc-alienware-jib:~$ 
 ```
