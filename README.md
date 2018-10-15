@@ -1,4 +1,43 @@
 # Monter un enviroonnment de développement meteor valide
+### Petit listing première installation mteor dans un conteneur
+
+```bash
+jibl@pc-alienware-jib:~$ ssh jibl@production-docker-host-1.kytes.io
+jibl@production-docker-host-1.kytes.io's password: 
+Last login: Mon Oct 15 22:28:13 2018 from pc-alienware-jib.home
+[jibl@pc-100 ~]$ ssh jibl@production-docker-host-1.kytes.io
+ssh: Could not resolve hostname production-docker-host-1.kytes.io: Name or service not known
+[jibl@pc-100 ~]$ docker exec -it sondereseau bash
+[root@9f87ef75ced2 /]# sh -c "$(curl -sSL https://install.meteor.com/)"
+Downloading Meteor distribution
+######################################################################## 100.0%
+
+Meteor 1.8 has been installed in your home directory (~/.meteor).
+Writing a launcher script to /usr/local/bin/meteor for your convenience.
+
+To get started fast:
+
+  $ meteor create ~/my_cool_app
+  $ cd ~/my_cool_app
+  $ meteor
+
+Or see the docs at:
+
+  docs.meteor.com
+
+[root@9f87ef75ced2 /]# meteor create ~/wesh-trop-bon
+
+You are attempting to run Meteor as the 'root' superuser. If you are developing, this is almost certainly *not* what you want to do and will likely result in incorrect file permissions. However, if you are
+running this command in a build process (CI, etc.), or you are absolutely sure you know what you are doing, set the METEOR_ALLOW_SUPERUSER environment variable or pass --allow-superuser to proceed.
+
+Even with METEOR_ALLOW_SUPERUSER or --allow-superuser, permissions in your app directory will be incorrect if you ever attempt to perform any Meteor tasks as a normal user. If you need to fix your permissions,
+run the following command from the root of your project:
+
+  sudo chown -Rh <username> .meteor/local
+
+[root@9f87ef75ced2 /]# 
+
+```
 
 # Dockerfile
 
