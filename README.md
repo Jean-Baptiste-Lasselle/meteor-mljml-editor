@@ -43,3 +43,12 @@ Grâce au entrypont, on pourra donc changer la valeur d'une variable d'environne
 
 Je peux aussi chercher une façon de trier la lsite et déduire automatiquement, quel est la version la plus récente, voire la `N-1`.
 
+
+### Mieux
+
+```bash
+jibl@pc-alienware-jib:~$ # git ls-remote --tags https://github.com/creationix/nvm|awk -F / '{print $3}'|awk -F ^ '{print $1}' >> liste-versions-avec-v.kytes 
+jibl@pc-alienware-jib:~$ # while read iterateur; do   iterateur=${iterateur#"v"} ; echo "$iterateur" >> ./liste-versions-NVM-a-trier-$(date '+%Y-%m-%dday_%Hh-%Mmin-%Ssec').kytes; done <./liste-versions-avec-v.kytes 
+jibl@pc-alienware-jib:~$ 
+
+```
