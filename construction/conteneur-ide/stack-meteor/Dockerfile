@@ -165,6 +165,12 @@ RUN echo " ---------------------------------------------------------------------
 # RUN export NVM_DIR="$HOME/.nvm"
 ARG NVM_DIR="$HOME/.nvm"
 ENV NVM_DIR=$NVM_DIR
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Verif NVM_DIR=$NVM_DIR "
+ls -all $NVM_DIR
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN node --version
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 # Les deux lignes ci-dessous DEVRONT, être présentes dans le mode CMD du conteneur
 RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
