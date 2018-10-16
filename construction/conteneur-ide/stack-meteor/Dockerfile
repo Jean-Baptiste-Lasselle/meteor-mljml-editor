@@ -51,7 +51,7 @@ ENV MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
 
 # NODE_OPTIONS='--debug --debug-brk'
 # ARG MARGUERITE_METEOR_NODE_OPTIONS='--debug --debug-brk'
-ARG MARGUERITE_METEOR_NODE_OPTIONS="--debug --debug-brk"
+ARG MARGUERITE_METEOR_NODE_OPTIONS=""
 ENV MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
 # Ainsi la variable d'envrionnement existera àau lancement du cotneneur, et définira la valeur de NODE_OPTIONS, à l'exécution meteor run
 ENV NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
@@ -227,7 +227,7 @@ RUN echo " ---------------------------------------------------------------------
 #     Install the latest LTS version with 'nvm install --lts'
 #     Use the latest LTS verison with 'nvm use --lts'
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm install --lts
-RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --lts
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --delete-prefix --lts
 RUN echo "Version de NodeJS en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN node --version
