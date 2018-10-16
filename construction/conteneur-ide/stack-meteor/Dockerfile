@@ -167,8 +167,8 @@ RUN echo " ---------------------------------------------------------------------
 # ++ Bon, eh ben on s'exécute : 
 # RUN export NVM_DIR="$HOME/.nvm"
 # ARG NVM_DIR="/home/$MARGUERITE_USER_NAME/.nvm"
-ARG NVM_DIR="$HOME"/.nvm
-ENV NVM_DIR="$HOME"/.nvm
+ARG NVM_DIR=/root/.nvm
+ENV NVM_DIR=/root/.nvm
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Verif \$HOME/.nvm=[$HOME/.nvm] "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
