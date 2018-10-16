@@ -117,6 +117,7 @@ read DEBUGJBL1
 echo "  "
 echo "  "
 echo "  "
+sudo docker system prune -f
 docker rmi --force $ID_IMAGE_MARGUERITE_STACK_METEOR
 docker rmi --force $ID_IMAGE_MARGUERITE_IDE_METEOR
 
