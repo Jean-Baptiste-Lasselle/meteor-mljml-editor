@@ -108,6 +108,10 @@ echo "  "
 echo "  "
 echo "  "
 docker rmi --force $ID_IMAGE_MARGUERITE_STACK_METEOR
+echo "  "
+echo " ---------------------------------------------------------------------- "
+echo "  "
+read DEBUGJBLRMI
 docker build -t $ID_IMAGE_MARGUERITE_STACK_METEOR -f $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR/Dockerfile $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR
 # - Je récupère, dans le fichier 'docker-compose.yml', les valeurs de configuration pour le username et le password
 echo "  "
