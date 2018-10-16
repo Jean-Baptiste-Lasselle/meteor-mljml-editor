@@ -120,9 +120,6 @@ echo "  "
 sudo docker system prune -f
 docker rmi --force $ID_IMAGE_MARGUERITE_STACK_METEOR
 docker rmi --force $ID_IMAGE_MARGUERITE_IDE_METEOR
-
-marguerite/meteor-ide                  1.0.0               c1738e033440        11 minutes ago      1.9GB
-marguerite/meteor-stac
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
