@@ -79,9 +79,9 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 #  ---> Running in 6c1abdc30079
 # useradd: unrecognized option '--quiet'
 # useradd: unrecognized option '--disabled-password'
-
+# useradd: unrecognized option '--gecos'
 # RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/$MARGUERITE_USER_NAME --gecos "User" $MARGUERITE_USER_NAME
-RUN useradd --shell /bin/sh --home /home/$MARGUERITE_USER_NAME --gecos "User" $MARGUERITE_USER_NAME
+RUN useradd --shell /bin/sh --home /home/$MARGUERITE_USER_NAME $MARGUERITE_USER_NAME
 
 # set password
 RUN echo "$MARGUERITE_USER_NAME:$MARGUERITE_USER_PWD" | chpasswd
