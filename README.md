@@ -233,3 +233,221 @@ source : https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-ma
 > 
 > > sudo apt-get install libssl-dev # Install the libssl-dev package - also let this one run to completion
 > 
+
+# ANNEXE : premier build reussit de l'ide
+
+Ci-dessous, ma sortie console pour la construction réussie d'une image docker avec dedans un stack nvm nodejs meteor entièrement paramétrabel en terme de versions, le nom du projet meteor peut-être changé via la variable d'envrionnement `NOM_PROJET_MARGUERITE_METEOR` du service `ide_marguerite` définit dans le `./docker-compose.yml` : 
+
+```bash
+# + Installation du Meteor Framework  + #
+Removing intermediate container 126bfaedd1c8
+ ---> 7c4dc51b58b6
+Step 140/176 : RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+ ---> Running in 4c54c364fc9c
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+Removing intermediate container 4c54c364fc9c
+ ---> 9cf4b9083c76
+Step 141/176 : RUN sh -c "$(curl -sSL https://install.meteor.com/)"
+ ---> Running in f18ec4ad2ebe
+Downloading Meteor distribution
+
+Meteor 1.8 has been installed in your home directory (~/.meteor).
+
+Now you need to do one of the following:
+
+  (1) Add "$HOME/.meteor" to your path, or
+  (2) Run this command as root:
+        cp "/home/jbl-devops/.meteor/packages/meteor-tool/1.8.0/mt-os.linux.x86_64/scripts/admin/launch-meteor" /usr/bin/meteor
+
+Then to get started, take a look at 'meteor --help' or see the docs at
+docs.meteor.com.
+Removing intermediate container f18ec4ad2ebe
+ ---> d772f2c7b665
+Step 142/176 : USER root
+ ---> Running in 794ed080d28e
+Removing intermediate container 794ed080d28e
+ ---> 19caff125ab2
+Step 143/176 : RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+ ---> Running in 758863d57d64
+Removing intermediate container 758863d57d64
+ ---> 91a5747f225f
+Step 144/176 : USER $MARGUERITE_USER_NAME
+ ---> Running in 9e8756e707d8
+Removing intermediate container 9e8756e707d8
+ ---> 8e60babdd2c3
+Step 145/176 : RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+ ---> Running in 5254f3331191
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+Removing intermediate container 5254f3331191
+ ---> ff1cc1497dd2
+Step 146/176 : RUN echo "# + Création du projet Meteor de l'utilisateur Marguerite        + #"
+ ---> Running in 9a03f74125de
+# + Création du projet Meteor de l'utilisateur Marguerite        + #
+Removing intermediate container 9a03f74125de
+ ---> ddf84041eacc
+Step 147/176 : RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+ ---> Running in f4341e86d304
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+Removing intermediate container f4341e86d304
+ ---> 584922827611
+Step 148/176 : RUN echo " Qui suis-je ? $(whoami)"
+ ---> Running in 994dc6326cd1
+ Qui suis-je ? jbl-devops
+Removing intermediate container 994dc6326cd1
+ ---> 4b5cf9e0f766
+Step 149/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in 3eb22b03ad48
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container 3eb22b03ad48
+ ---> 1df178da0434
+Step 150/176 : RUN echo " Vérification valeurs variables d'environnement :  "
+ ---> Running in 34141075acf8
+ Vérification valeurs variables d'environnement :  
+Removing intermediate container 34141075acf8
+ ---> c22a3765b025
+Step 151/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in 5bd2bb6e9d54
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container 5bd2bb6e9d54
+ ---> 7259749174a1
+Step 152/176 : RUN echo " MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME "
+ ---> Running in 1557b8d4e401
+ MARGUERITE_USER_NAME=jbl-devops 
+Removing intermediate container 1557b8d4e401
+ ---> 666ccd4fcafc
+Step 153/176 : RUN echo "  "
+ ---> Running in 1148ced35835
+  
+Removing intermediate container 1148ced35835
+ ---> 692adb988d50
+Step 154/176 : RUN echo " WORKSPACE_IDE=$WORKSPACE_IDE "
+ ---> Running in 6020f1a132e0
+ WORKSPACE_IDE=/marguerite/ide/esp-travail/ 
+Removing intermediate container 6020f1a132e0
+ ---> 2348bfab21b5
+Step 155/176 : RUN echo "  "
+ ---> Running in 36b056fb325b
+  
+Removing intermediate container 36b056fb325b
+ ---> c5b9e2b0e762
+Step 156/176 : RUN echo " NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR "
+ ---> Running in 48ac91d3e273
+ NOM_PROJET_MARGUERITE_METEOR=jbl-devops-projet-meteor 
+Removing intermediate container 48ac91d3e273
+ ---> ec494fff6232
+Step 157/176 : RUN echo "  "
+ ---> Running in 8ecc04d595c1
+  
+Removing intermediate container 8ecc04d595c1
+ ---> 5b266f919940
+Step 158/176 : RUN echo " MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT "
+ ---> Running in 3d8319491b7f
+ MARGUERITE_METEOR_PORT=4000 
+Removing intermediate container 3d8319491b7f
+ ---> 6bb921b31129
+Step 159/176 : RUN echo "  "
+ ---> Running in 9fee2ed2b2c5
+  
+Removing intermediate container 9fee2ed2b2c5
+ ---> 9e5899c5fbdb
+Step 160/176 : RUN echo " MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS "
+ ---> Running in 10f18aa522fa
+ MARGUERITE_METEOR_NODE_OPTIONS= 
+Removing intermediate container 10f18aa522fa
+ ---> 64675e0926ba
+Step 161/176 : RUN echo "  "
+ ---> Running in b384504b106d
+  
+Removing intermediate container b384504b106d
+ ---> 15239268067b
+Step 162/176 : RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR "
+ ---> Running in e2c21eb4b7b6
+ $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR=/marguerite/ide/esp-travail//jbl-devops-projet-meteor 
+Removing intermediate container e2c21eb4b7b6
+ ---> 7d933c3987cf
+Step 163/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in 0e3dc704bbcd
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container 0e3dc704bbcd
+ ---> ebe9516d07db
+Step 164/176 : WORKDIR $WORKSPACE_IDE
+ ---> Running in 99dcb9b3991d
+Removing intermediate container 99dcb9b3991d
+ ---> f70b61179358
+Step 165/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in 3ca65b7f2364
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container 3ca65b7f2364
+ ---> 2745e139c73d
+Step 166/176 : RUN echo " Vérification version Framework Meteor :  "
+ ---> Running in fa7c8553478a
+ Vérification version Framework Meteor :  
+Removing intermediate container fa7c8553478a
+ ---> fc73103de51b
+Step 167/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in f092bd0a6c48
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container f092bd0a6c48
+ ---> 683db9304928
+Step 168/176 : RUN export PATH=$PATH:$HOME/.meteor && meteor --version
+ ---> Running in 3f27f8baef2c
+Meteor 1.8
+Removing intermediate container 3f27f8baef2c
+ ---> 8e6e13c565b3
+Step 169/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in fc7bb5c11ad3
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container fc7bb5c11ad3
+ ---> a17c9b9dcc91
+Step 170/176 : RUN echo " Création du projet Meteor [$NOM_PROJET_MARGUERITE_METEOR] :  "
+ ---> Running in aa10eeb1bf14
+ Création du projet Meteor [jbl-devops-projet-meteor] :  
+Removing intermediate container aa10eeb1bf14
+ ---> 997b405d45a4
+Step 171/176 : RUN echo " ----------------------------------------------------------------------------------------------------------- "
+ ---> Running in 735546ae422f
+ ----------------------------------------------------------------------------------------------------------- 
+Removing intermediate container 735546ae422f
+ ---> d255e0e811e1
+Step 172/176 : RUN export PATH="$PATH:$HOME/.meteor" && echo " VERIF PATH=[$PATH] " && meteor create $NOM_PROJET_MARGUERITE_METEOR
+ ---> Running in 3e95e4efe8cb
+ VERIF PATH=[/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jbl-devops/.meteor] 
+Created a new Meteor app in 'jbl-devops-projet-meteor'.
+
+To run your new app:
+  cd jbl-devops-projet-meteor
+  meteor
+
+If you are new to Meteor, try some of the learning resources here:
+  https://www.meteor.com/tutorials
+
+To start with a different app template, try one of the following:
+
+  meteor create --bare    # to create an empty app
+
+  meteor create --minimal # to create an app with as few Meteor packages as possible
+  meteor create --full    # to create a more complete scaffolded app
+  meteor create --react   # to create a basic React-based app
+
+Removing intermediate container 3e95e4efe8cb
+ ---> 1b5c0cda3690
+Step 173/176 : WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
+ ---> Running in 61e353955f46
+Removing intermediate container 61e353955f46
+ ---> c598e968e7b2
+Step 174/176 : EXPOSE $MARGUERITE_METEOR_PORT/tcp
+ ---> Running in faadf03008bf
+Removing intermediate container faadf03008bf
+ ---> 150dbf6844a4
+Step 175/176 : ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"]
+ ---> Running in 64606b125709
+Removing intermediate container 64606b125709
+ ---> ca59b482338a
+Step 176/176 : CMD ["/bin/bash"]
+ ---> Running in c3bd8c9f6259
+Removing intermediate container c3bd8c9f6259
+ ---> 4c3147ec29a9
+Successfully built 4c3147ec29a9
+Successfully tagged marguerite/stack-meteor:1.0.0
+
+```
