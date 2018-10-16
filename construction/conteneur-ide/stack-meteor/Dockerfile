@@ -274,8 +274,8 @@ USER root
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 USER $MARGUERITE_USER_NAME
 # curl https://install.meteor.com/ | sh
-RUN sh -c "$(curl -sSL https://install.meteor.com/)"
-
+# RUN sh -c "$(curl -sSL https://install.meteor.com/)"
+RUN export PATH=$PATH:$HOME/.meteor && sh -c "$(curl -sSL https://install.meteor.com/)"
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
