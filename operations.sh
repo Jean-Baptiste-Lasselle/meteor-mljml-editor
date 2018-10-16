@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # - ENV 
-export NOM_CONTENEUR_HUBOT=hubot
-export NOM_CONTENEUR_ROCKETCHAT=rocketchat
-export NOM_CONTENEUR_BDD_ROCKETCHAT=mongo
-export NOM_CONTENEUR_INIT_REPLICASET_BDD_ROCKETCHAT=mongo-init-replica
-export UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME=jbl
-export UTILISATEUR_HUBOT_ROCKETCHAT_PWD=jbl
+export NOM_CONTENEUR_IDE_MARGUERITE=ide-marguerite
+
+export MARGUERITE_USER_NAME=jbl-devops
+export MARGUERITE_USER_PWD=marguerite
+
 export ALIAS_INFRA=kytes
 
 # - Fonctions
