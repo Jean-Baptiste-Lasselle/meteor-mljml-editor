@@ -233,9 +233,10 @@ RUN echo " Verif executable NodeJS installé /usr/bin/node : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN ls -all /usr/bin/node
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN echo " Version de NodeJS en vigueur : "
+RUN echo " Versions de NodeJS / NPM en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN node --version
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && node --version
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && npm --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "  "
 
