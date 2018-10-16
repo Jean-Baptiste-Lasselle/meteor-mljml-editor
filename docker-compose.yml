@@ -46,7 +46,7 @@ services:
       # + mais plus depusi l'avènement du soudeur
       # - mongo-init-replica
     networks:
-      - "$NOM_DU_RESEAU_INFRA_DOCKER"
+      - "$NOM_DU_RESEAU_MARGUERITE_DOCKER"
 #       devops:
 #         ipv4_address: 192.168.160.8
     restart: always
@@ -70,7 +70,7 @@ services:
     expose:
       - 27017
     networks:
-      - "$NOM_DU_RESEAU_INFRA_DOCKER"
+      - "$NOM_DU_RESEAU_MARGUERITE_DOCKER"
 #       devops:
 #         ipv4_address: 192.168.160.6
     restart: always
