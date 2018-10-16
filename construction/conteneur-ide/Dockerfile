@@ -37,18 +37,24 @@ ENV NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
 # => NIVEAU ENTRYPOPINT :  on fait le meteor run --port 
 # => NIVEAU CMD :  CMD ["/bin/bash"] , aisni l'ide pourra exécuter n'importe quelle commande, en taznt que user linux $MARGUERITE_USER_NAME 
 
+
+USER root
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
 ADD marguerite-healthcheck.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
-USER root
+RUN chmod a+x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
+RUN echo " ----------------------------------- "
 RUN echo " VERIF WORKSPACE_IDE=$WORKSPACE_IDE"
 RUN echo " VERIF NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR"
 RUN echo " VERIF REP HEALTHCHECK=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/"
+RUN echo " ----------------------------------- "
 RUN echo " contenu du répertoire WORKSPACE_IDE, s'il existe  : "
 RUN ls -all $WORKSPACE_IDE
+RUN echo " ----------------------------------- "
 RUN echo " contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
 RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
+RUN echo " ----------------------------------- "
 RUN exit 2
-RUN chmod +x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
+
 USER $MARGUERITE_USER_NAME
 HEALTHCHECK --interval=1s --timeout=30s --retries=150 CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
 # ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
