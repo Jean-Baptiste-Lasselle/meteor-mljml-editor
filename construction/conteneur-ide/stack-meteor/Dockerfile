@@ -196,8 +196,8 @@ RUN echo "# +++++++++++++++++++++++++++++++++++++++++ #" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion"  >> /etc/profile
 RUN echo "# Chargement de NVM, pour l'exécution du build de l'image docker"
-# RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-RUN [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" && "$NVM_DIR/nvm.sh" # Ceci aussi, charge nvm
+RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# RUN [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" && "$NVM_DIR/nvm.sh" # Ceci aussi, charge nvm
 RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
