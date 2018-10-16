@@ -70,12 +70,7 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # Boîte à outils système
 RUN yum update -y && yum install -y curl wget net-tools vim git
 
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Installation dui ENTRYPOINT Marguerite                       + #"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-# Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
-ADD point-d-entree.sh $WORKSPACE_IDE
-RUN chmod a+x $WORKSPACE_IDE/point-d-entree.sh
+
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création de l'utilisateur Linux Marguerite                   + #"
@@ -115,7 +110,6 @@ RUN echo " "
 
 # On doit reprende le user root pour le reste du build de l'image du conteneur, le USER marguerite sera repris pour le RUN
 USER root
-# eh ben non, je vais essayer de continuer avec le user marguerite.... Quoi que ...
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
@@ -124,6 +118,13 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN mkdir -p $WORKSPACE_IDE
 # Le workspace doit appartenir au user marguerite.
 RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE
+
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Installation dui ENTRYPOINT Marguerite                       + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+# Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
+ADD point-d-entree.sh $WORKSPACE_IDE
+RUN chmod a+x $WORKSPACE_IDE/point-d-entree.sh
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #"
