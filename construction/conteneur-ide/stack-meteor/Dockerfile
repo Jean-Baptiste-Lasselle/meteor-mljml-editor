@@ -174,9 +174,24 @@ RUN ls -all $NVM_DIR
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN node --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-# Les deux lignes ci-dessous DEVRONT, être présentes dans le mode CMD du conteneur
+# Configuration du profil NVM par défaut de tous les users 
+RUN echo "  " 
+RUN echo " Verifcation conteneur \$HOME = $HOME "
+RUN echo "  " 
+RUN ls -all $HOME
+RUN echo "  " 
+RUN echo "  " 
+RUN echo "  " 
+RUN touch /etc/.bash_profile
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+RUN echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> /etc/profile
+RUN echo "[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion"  >> /etc/profile
+# Chargement de NVM, pour l'exécutioon du build de l'image docker
 RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "Version de NVM installée : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
