@@ -175,8 +175,7 @@ RUN echo " ---------------------------------------------------------------------
 RUN echo " Verif NVM_DIR=[$NVM_DIR] "
 RUN ls -all $NVM_DIR
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN node --version
-RUN echo " ----------------------------------------------------------------------------------------------------------- "
+
 # Configuration du profil NVM par défaut de tous les users 
 RUN echo "  " 
 RUN echo " Verifcation conteneur \$HOME = $HOME "
@@ -185,9 +184,13 @@ RUN ls -all $HOME
 RUN echo "  " 
 RUN echo "  " 
 RUN echo "  " 
-RUN touch /etc/.bash_profile
+RUN touch /etc/profile
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+RUN echo " " >> /etc/profile
+RUN echo "# +++++++++++++++++++++++++++++++++++++++++ #" >> /etc/profile
+RUN echo "# ++ Configuration Marguerite Meteor IDE ++ #" >> /etc/profile
+RUN echo "# +++++++++++++++++++++++++++++++++++++++++ #" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion"  >> /etc/profile
 # Chargement de NVM, pour l'exécutioon du build de l'image docker
