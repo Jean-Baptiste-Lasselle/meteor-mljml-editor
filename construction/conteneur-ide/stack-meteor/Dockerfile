@@ -144,6 +144,27 @@ RUN echo " Installation de NVM ... "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN sh -c "$(curl -sSL https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh)"
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
+#  ----------------------------------------------------------------------------------------------------------- 
+# Removing intermediate container 38600010f680
+#  ---> 19193a808cbe
+# Step 72/125 : RUN sh -c "$(curl -sSL https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh)"
+#  ---> Running in dc885e661322
+# => Downloading nvm from git to '/root/.nvm'
+# => Cloning into '/root/.nvm'...
+# => Compressing and cleaning up git repository
+# 
+# => Appending nvm source string to /root/.bashrc
+# => Appending bash_completion source string to /root/.bashrc
+# => Close and reopen your terminal to start using nvm or run the following to use it now:
+# 
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# ++ BOn, eh ben on s'exécute : 
+RUN export NVM_DIR="$HOME/.nvm"
+RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "Version de NVM installée : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN nvm --version
