@@ -54,7 +54,12 @@ ENV MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
 ARG MARGUERITE_METEOR_NODE_OPTIONS="--debug --debug-brk"
 ENV MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
 # Ainsi la variable d'envrionnement existera àau lancement du cotneneur, et définira la valeur de NODE_OPTIONS, à l'exécution meteor run
-ENV NODE_OPTIONS
+ENV NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+
+# ---- MARGUERITE MONGO CONF ---- # 
+# cf. dans le fichier ["./.env"], la valeur de la variable [NOM_DU_REPLICASET_MONGO]
+ARG NOM_DU_REPLICASET_MONGO=val_defaut_dans_conteneur_rs0
+ENV NOM_DU_REPLICASET_MONGO=$NOM_DU_REPLICASET_MONGO
 
 # ---- OPS ---- #
 USER root
