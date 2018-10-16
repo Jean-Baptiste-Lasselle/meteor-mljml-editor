@@ -50,7 +50,14 @@ checkHealth () {
 
 # - OPS 
 
-# - Je récupère, dans le fichier 'docker-compose.yml', les valeurs de configuration pour le username et le password
+# 1. Il faut construire lm'image de base du STACK MARGUERITE / METEOR
+# !! => Il y a un match avec les valeurs des mêmes variables d'envrionnement, dans le ficheir "./.env"
+export CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR=./construction/conteneur-ide/stack-meteor/
+export IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME=marguerite/
+export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=stack-meteor
+export VERSION_IMAGE_MARGUERITE_STACK_METEOR=1.0.0
+
+
 
 # export UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME=$(cat ./docker-compose.yml|grep ROCKETCHAT_USER | awk -F = '{print $2}')
 # export UTILISATEUR_HUBOT_ROCKETCHAT_PWD=$(cat ./docker-compose.yml|grep ROCKETCHAT_PASSWORD | awk -F = '{print $2}')
@@ -59,12 +66,70 @@ checkHealth () {
 export MARGUERITE_USER_NAME=$(cat ./.env|grep MARGUERITE_USER_NAME | awk -F = '{print $2}')
 export MARGUERITE_USER_PWD=$(cat ./.env|grep MARGUERITE_USER_PWD | awk -F = '{print $2}')
 
+export CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR=$(cat ./.env|grep CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR | awk -F = '{print $2}')
+export IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME=$(cat ./.env|grep IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME | awk -F = '{print $2}')
+export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=$(cat ./.env|grep IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME | awk -F = '{print $2}')
+export VERSION_IMAGE_MARGUERITE_STACK_METEOR=$(cat ./.env|grep VERSION_IMAGE_MARGUERITE_STACK_METEOR | awk -F = '{print $2}')
 
+
+# Sauf celle-ci, qui est calculée dans l'exécution shell
+export ID_IMAGE_MARGUERITE_STACK_METEOR=$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
+
+
+echo "  "
+echo " ---------------------------------------------------------------------- "
+echo "  AVANT DOCKER BUILD STACK METEOR : "
+echo " ---------------------------------------------------------------------- "
+echo "  "
+echo "    MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME"
+echo "  "
+echo "    MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD"
+echo "  "
+echo "    CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR=$CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR"
+echo "  "
+echo "    IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME=$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME"
+echo "  "
+echo "    IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME"
+echo "  "
+echo "    VERSION_IMAGE_MARGUERITE_STACK_METEOR=$VERSION_IMAGE_MARGUERITE_STACK_METEOR"
+echo "  "
+echo "    ID_IMAGE_MARGUERITE_STACK_METEOR=$ID_IMAGE_MARGUERITE_STACK_METEOR"
+echo "  "
+echo "    docker impages  : "
+echo "  "
+docker images
+echo "  "
+echo " ---------------------------------------------------------------------- "
+echo "  "
+read DEBUGJBL1
+echo "  "
+echo "  "
+echo "  "
+
+docker build -t $ID_IMAGE_MARGUERITE_STACK_METEOR -f $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR/Dockerfile $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR
+# - Je récupère, dans le fichier 'docker-compose.yml', les valeurs de configuration pour le username et le password
+echo "  "
+echo " ---------------------------------------------------------------------- "
+echo "  APRES DOCKER BUILD STACK METEOR : "
+echo " ---------------------------------------------------------------------- "
+echo "  "
+echo "    ID_IMAGE_MARGUERITE_STACK_METEOR=$ID_IMAGE_MARGUERITE_STACK_METEOR"
+echo "  "
+echo "    docker impages  : "
+echo "  "
+docker images
+echo "  "
+echo " ---------------------------------------------------------------------- "
+echo "  "
+read DEBUGJBL2
+echo "  "
+echo "  "
+echo "  "
 
 # - Je rends exécutables les scripts invoqués dans la présente recette
-# chmod +x ./initialisation-iaac-cible-deploiement.sh
+chmod +x ./initialisation-iaac-cible-deploiement.sh
 # J'initialise tout de suite la cible de déploiement
-# ./initialisation-iaac-cible-deploiement.sh
+./initialisation-iaac-cible-deploiement.sh
 
 
 
@@ -76,18 +141,17 @@ echo "  "
 docker images
 echo "  "
 echo " ---------------------------------------------------------------------- "
-echo "  MEttez éventuellement à jour votre ./initialisation-iaac-cible-deploiement.sh"
-echo "  Pressez la touche entrée.  "
+echo "  Mettez éventuellement à jour votre ./initialisation-iaac-cible-deploiement.sh"
+echo "  Puis pressez la touche entrée pour poursuivre les opérations.  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read DEBUGJBL
+read DEBUGJBL3
 clear
 
 # - Je rends exéutable les fichiers de script utilisés dans les builds d'images Docker qui doivent l'être : 
-chmod +x ./mongo-init-replica/construction/*
-# - cf. ./mongodb/construction/Dockerfile 
-chmod +x ./mongodb/construction/* 
-chmod +x ./rocketchat/construction/* 
+chmod +x ./*.sh
+# chmod +x ./construction/mongodb/*
+
 # chmod +x ./hubot-init-rocketcha/construction/* 
 # - Je créée "tout"
 # docker-compose down --rmi all && docker system prune -f && docker-compose build && docker-compose up -d 
