@@ -72,7 +72,11 @@ RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/$MARGUERITE
 RUN echo "$MARGUERITE_USER_NAME:$MARGUERITE_USER_PWD" | chpasswd
 # Et on fait de l'utilisateur $MARGUERITE_USER_NAME, un administrateur (aura le droit d'utiliser sudo?...).
 # Pour CentOS le groupe "sudo"  n'existe pas, mais c'est le groupe "wheel" qui existe, et qu'il faut utiliser
-RUN usermod -aG wheel $MARGUERITE_USER_NAME
+ARG SUODERS_SYSTEM_GROUP=wheel
+ENV SUODERS_SYSTEM_GROUP=wheel
+
+
+RUN usermod -aG $SUODERS_SYSTEM_GROUP $MARGUERITE_USER_NAME
 # Pour Debian / Ubuntu le groupe "wheel"  n'existe pas, mais c'est le groupe "sudo" qui existe, et qu'il faut utiliser
 # RUN usermod -aG sudo $MARGUERITE_USER_NAME
 
@@ -94,7 +98,8 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du workspace IDE Marguerite                         + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN mkdir -p $WORKSPACE_IDE
-
+# Le workspace doit appartenir au user marguerite.
+RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #"
