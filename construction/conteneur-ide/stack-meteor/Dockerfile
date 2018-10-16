@@ -250,7 +250,8 @@ RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
 # la valeur du chemin PATH=$PATH:~/opt/bin dans le PATH
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
-RUN export PATH=$PATH:$HOME/.meteor && meteor --version
+# iol ne s'agit que de faire un afficahge de version, pendant la construction d'une image, ...
+RUN export PATH=$PATH:$HOME/.meteor && meteor --allow-superuser --version
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du projet Meteor Marguerite                         + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
@@ -280,7 +281,7 @@ RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PR
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 
 WORKDIR $WORKSPACE_IDE
-RUN export PATH=$PATH:$HOME/.meteor && meteor create $NOM_PROJET_MARGUERITE_METEOR
+RUN export PATH="$PATH:$HOME/.meteor" && echo " VERIF PATH=[$PATH] " && meteor create $NOM_PROJET_MARGUERITE_METEOR
 WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
 
 EXPOSE $MARGUERITE_METEOR_PORT/tcp
