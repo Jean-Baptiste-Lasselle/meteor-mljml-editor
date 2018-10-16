@@ -23,6 +23,7 @@ services:
         - MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
         - MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
         - MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
+        - NOM_DU_REPLICASET_MONGO
     volumes:
       - ./marguerite/ide/workspace:$IN_CONTAINER_WORKSPACE_IDE:rw
     environment:
@@ -31,6 +32,7 @@ services:
       - MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
       - MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
       - MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
+      - NOM_DU_REPLICASET_MONGO
     ports:
       - 3030:$MARGUERITE_METEOR_PORT
     expose:
@@ -55,6 +57,11 @@ services:
     volumes:
      - ./marguerite/mongodb/data:/data/db
      - ./marguerite/mongodb/dump:/dump
+    # ---- 
+    # - contenu "./.env" : 
+    # ---- 
+    # NOM_DU_REPLICASET_MONGO=marguerite_rs0
+    # ---- 
     command: mongod --smallfiles --oplogSize 128 --replSet $NOM_DU_REPLICASET_MONGO
     ports:
       - 27017:27017
