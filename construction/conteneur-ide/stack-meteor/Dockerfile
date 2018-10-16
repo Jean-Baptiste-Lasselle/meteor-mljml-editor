@@ -252,22 +252,22 @@ RUN echo "  "
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 # 
 # 
+USER $MARGUERITE_USER_NAME
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
 # curl https://install.meteor.com/ | sh
 RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
 # la valeur du chemin PATH=$PATH:~/opt/bin dans le PATH
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
-# iol ne s'agit que de faire un afficahge de version, pendant la construction d'une image, ...
-RUN export PATH=$PATH:$HOME/.meteor && meteor --allow-superuser --version
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du projet Meteor de l'utilisateur Marguerite        + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-USER $MARGUERITE_USER_NAME
+
 RUN echo " Qui suis-je ? $(whoami)"
 
 # ++ Vérification valeurs variables d'environnement : 
@@ -289,6 +289,16 @@ RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PR
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 
 WORKDIR $WORKSPACE_IDE
+
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Vérification version Framework Meteor :  "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+# Il ne s'agit que de faire un afficahge de version, pendant la construction d'une image, ...
+RUN export PATH=$PATH:$HOME/.meteor && meteor --allow-superuser --version
+
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Création du projet Meteor [$NOM_PROJET_MARGUERITE_METEOR] :  "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN export PATH="$PATH:$HOME/.meteor" && echo " VERIF PATH=[$PATH] " && meteor create $NOM_PROJET_MARGUERITE_METEOR
 WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
 
