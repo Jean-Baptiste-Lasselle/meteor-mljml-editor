@@ -229,9 +229,9 @@ RUN echo " ---------------------------------------------------------------------
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm install --lts
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --delete-prefix --lts
 
-RUN echo " Verif executable NodeJS installé /usr/bin/node : "
-RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN ls -all /usr/bin/node
+# RUN echo " Verif executable NodeJS installé /usr/bin/node : "
+# RUN echo " ----------------------------------------------------------------------------------------------------------- "
+# RUN ls -all /usr/bin/node
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Versions de NodeJS / NPM en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
