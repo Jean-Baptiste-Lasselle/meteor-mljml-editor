@@ -27,7 +27,7 @@ export PROVISIONING_HOME=$HOME/marguerite && cd $PROVISIONING_HOME && docker-com
 _Pre-IAAC_ :
 
 ```bash
-cd .. && sudo rm -rf marguerite/ && sudo docker system prune -f && export PROVISIONING_HOME=$HOME/marguerite && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
+export PROVISIONING_HOME=$HOME/marguerite && cd $HOME && sudo rm -rf $PROVISIONING_HOME && sudo docker system prune -f &&  && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
 ```
 
 # Monter un environnment de développement meteor valide
