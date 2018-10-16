@@ -242,7 +242,7 @@ RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --delete-prefix -
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Versions de NodeJS / NPM en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && node --version
+RUN echo NVM_DIR=$NVM_DIR && node --version
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && npm --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "  "
@@ -268,15 +268,16 @@ RUN echo " ---------------------------------------------------------------------
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
+# curl https://install.meteor.com/ | sh
+RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout dans PATH, de
 # la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
 USER root
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 USER $MARGUERITE_USER_NAME
-# curl https://install.meteor.com/ | sh
-# RUN sh -c "$(curl -sSL https://install.meteor.com/)"
-RUN export PATH=$PATH:$HOME/.meteor && sh -c "$(curl -sSL https://install.meteor.com/)"
-
+# - NOTA BENE : On remarquera que pour chaque exécution de la commande meteor, nous n'avons jamais besoin de
+# -             préfixer par la commande 'source $NVM_DIR/nvm.sh &&  &&  '
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du projet Meteor de l'utilisateur Marguerite        + #"
@@ -307,7 +308,11 @@ WORKDIR $WORKSPACE_IDE
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Vérification version Framework Meteor :  "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-# Il ne s'agit que de faire un afficahge de version, pendant la construction d'une image, ...
+# Il ne s'agit que de faire un afficahge de la version du framework meteor, pendant le buid time image conteneur
+# - NOTA BENE : On remarquera que pour chaque exécution de la commande meteor, nous n'avons jamais besoin de
+# -             préfixer par la commande 'source $NVM_DIR/nvm.sh &&  &&  '
+# Par exemple, il serait inutile ded'exécuter la commande ci-dessoous, sous la forme suivante  :
+#      RUN source $NVM_DIR/nvm.sh &&  && export PATH=$PATH:$HOME/.meteor && meteor --version
 RUN export PATH=$PATH:$HOME/.meteor && meteor --version
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
