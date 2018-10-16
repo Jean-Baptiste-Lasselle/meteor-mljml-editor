@@ -20,13 +20,57 @@ ARG VERSION_METEOR_FRAMEWORK=1.0.0
 ENV VERSION_METEOR_FRAMEWORK=$VERSION_METEOR_FRAMEWORK
 
 
+# --- MARGUERITE --- #
+
+# -->> Le développeur, l'architecte, le devops ... devra correspondre à son user linux dans l'hote Docker?
+ARG MARGUERITE_USER_NAME=jbl-devops
+ENV MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
+
+ARG MARGUERITE_USER_PWD=marguerite
+ENV MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
+
+ARG WORKSPACE_IDE=/home/$MARGUERITE_USER_NAME/marguerite/ide/esp-travail/
+ENV WORKSPACE_IDE=$WORKSPACE_IDE
+
+ARG NOM_PROJET_MARGUERITE_METEOR=$MARGUERITE_USER_NAME-projet-meteor
+ENV NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR
+
+ARG CHEMIN_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
+ENV CHEMIN_PROJET_MARGUERITE_METEOR=$CHEMIN_PROJET_MARGUERITE_METEOR
+
+
+
+USER root
+
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Création de l'utilisateur Linux Marguerite                   + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
+# quietly add a user without password
+# RUN adduser --quiet --disabled-password --shell /bin/bash --home /home/newuser --gecos "User" $MARGUERITE_USER_NAME
+RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/$MARGUERITE_USER_NAME --gecos "User" $MARGUERITE_USER_NAME
+# set password
+RUN echo "$MARGUERITE_USER_NAME:$MARGUERITE_USER_PWD" | chpasswd
+USER $MARGUERITE_USER_NAME
+
+RUN echo " "
+RUN echo " Vérif existence répertoire home du user"
+RUN echo " "
+RUN echo " Qui suis-je ? $(whoami)"
+RUN echo " Ma maison est : [$HOME]"
+RUN ls -all $HOME
+RUN echo " "
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Création du workspace IDE Marguerite                         + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN mkdir -p $WORKSPACE_IDE
+WORKDIR $WORKSPACE_IDE
 # Boîte à outils système
 RUN yum update -y && yum install -y curl wget net-tools vim git
 
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-# 
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # 1. On récupère les dernières versions de NVM
 RUN export HORODATAGE_OPS=$(date '+%Y-%m-%dday_%Hh-%Mmin-%Ssec')
@@ -39,19 +83,61 @@ RUN while read iterateur; do   iterateur=${iterateur#"v"} ; echo "$iterateur" >>
 # On va donc maintenant trier cette liste, pour en retirer la dernière et l'avant dernière entrée : 
 RUN export DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 1 | head -n 1) && echo "La dernière version de NVM est : [$DERNIRE_VERSION_NVM] "
 RUN export AVANT_DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 2 | head -n 1) && echo "La dernière version de NVM est : [$AVANT_DERNIRE_VERSION_NVM] "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "Les 5 dernières dernières versions de NVM sont : "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 5
-
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 # Maintenant, on va installer NVM dans son avant dernière version (petite habitude d'ingénierie, l'avant dernière a tout de même une maturité, la denrière est trop jeune)
 # curl "https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh" | bash
 # + sécurisé : 
-sh -c "$(curl -sSL https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh)"
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Installation de NVM ... "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN sh -c "$(curl -sSL https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh)"
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo "Version de NVM installée : "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN nvm --version
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Installation de NodeJS, en dernière version LTS ... "
+RUN echo " - NodeJS est par défaut installé dans sa version LTS la plus récente.  "
+RUN echo " - Puis, si la variable d'environnement \$VERSION_NODEJS : "
+RUN echo "       => est définie,  "
+RUN echo "       => d'une valeur valide, c-a-d églae à l'une des valeurs de la liste des versions NodeJS existante, ou parmi { 'lts', 'latest' } "
+RUN echo "       => et que sa valeur est différente de 'lts' "
+# 
+RUN echo "   Alors, la version spécififée par Puis, si la variable d'environnement \$VERSION_NODEJS : est définie, d'une valeur valide, et différente de \"lts\" "
+RUN echo " Ce comportement n'est pas encore implémenté, pour l'instant c'est toujours la dernière version LTS qui est installée. "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+#     Install the latest version with 'nvm install node'
+#     Use the latest version with 'nvm use node'
+#     Install the latest LTS version with 'nvm install --lts'
+#     Use the latest LTS verison with 'nvm use --lts'
+RUN nvm install --lts
+RUN nvm use --lts
+RUN echo "Version de NodeJS en vigueur : "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN node --version
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
 
 
+# ++ Vérification valeurs variables d'environnement : 
+
+
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 # + Installation de Meteor + #
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 # 
 # 
 # curl https://install.meteor.com/ | sh
-sh -c "$(curl -sSL https://install.meteor.com/)"
+RUN sh -c "$(curl -sSL https://install.meteor.com/)"
+RUN meteor --version
+# Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
+# ENTRYPOINT ["./point-d-entree.sh"] 
+CMD ["/bin/bash"]
