@@ -7,7 +7,7 @@ RUN yum update -y && yum install -y git iputils vim net-tools curl wget iperf3 t
 RUN echo "  "
 RUN echo " Vérif installation netcat : "
 RUN echo "  "
-RUN ncat -v
+RUN ncat -v localhost
 RUN echo "  "
 RUN echo " Vérif installation netstat : "
 RUN echo "  "
