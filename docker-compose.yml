@@ -37,7 +37,7 @@ services:
       - NOM_DU_REPLICASET_MONGO
       - NVM_DIR=/root/nvm
     ports:
-      - 3030:$MARGUERITE_METEOR_PORT
+      - $MARGUERITE_METEOR_PORT:$MARGUERITE_METEOR_PORT
     expose:
       - "$MARGUERITE_METEOR_PORT"
 #     depends_on:
