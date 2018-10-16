@@ -1,4 +1,4 @@
-# Monter un enviroonnment de développement meteor valide
+# Monter un environnment de développement meteor valide
 ### Petit listing première installation `Meteor` dans un conteneur
 
 ![Première installation](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/premiere-installation-meteor-dans-conteneur-docker.png)
