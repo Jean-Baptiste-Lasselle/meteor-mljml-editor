@@ -67,7 +67,7 @@ services:
     # ---- 
     command: mongod --smallfiles --oplogSize 128 --replSet $NOM_DU_REPLICASET_MONGO
     ports:
-      - 27017:27017
+      - 27018:27017
     expose:
       - 27017
     networks:
@@ -85,9 +85,9 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/:rw
       - ./nginx/logs/:/var/log/nginx/:rw
     ports:
-      - "80:8030"
-      - "443:7443"
-      - "222:322"
+      - "801:8030"
+      - "1443:7443"
+      - "1222:322"
     expose:
       - "8030"
       - "7443"
