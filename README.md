@@ -1,6 +1,8 @@
 # Monter un enviroonnment de développement meteor valide
-### Petit listing première installation mteor dans un conteneur
+### Petit listing première installation `Meteor` dans un conteneur
 
+![Première installation](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/premiere-installation-meteor-dans-conteneur-docker.png)
+Soit, en résultat (et déjà quelques indications pour la suite de la conception de l'environnement de développement) : 
 ```bash
 jibl@pc-alienware-jib:~$ ssh jibl@production-docker-host-1.kytes.io
 jibl@production-docker-host-1.kytes.io's password: 
