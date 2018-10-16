@@ -187,6 +187,8 @@ RUN echo "  "
 RUN touch /etc/profile
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# --- 
+# Dans le contexte de l'exécution du conteneur, le /etc/profile assure qu'NVM est chargé, et que le script  $NVM_DIR/nvm.sh est sourcé
 RUN echo " " >> /etc/profile
 RUN echo "# +++++++++++++++++++++++++++++++++++++++++ #" >> /etc/profile
 RUN echo "# ++ Configuration Marguerite Meteor IDE ++ #" >> /etc/profile
@@ -194,19 +196,19 @@ RUN echo "# +++++++++++++++++++++++++++++++++++++++++ #" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion"  >> /etc/profile
 RUN echo "# Chargement de NVM, pour l'exécution du build de l'image docker"
-RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-RUN [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+# RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+RUN [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh" && "$NVM_DIR/nvm.sh" # Ceci aussi, charge nvm
 RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "Version de NVM installée : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-# RUN $NVM_DIR/nvm.sh
-# RUN echo $NVM_DIR && source $NVM_DIR/nvm.sh &&  $NVM_DIR/nvm.sh --version
+# ---
+# Dans le contexte du build image docker, on devra, à chaque fois que 'lon veut exécuter une
+# commande NVM, d'abord "sourcer" le fichier [$NVM_DIR/nvm.sh], avec la syntaxe shell [source $NVM_DIR/nvm.sh]
+# --- 
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm --version
-
-RUN nvm --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
@@ -224,8 +226,8 @@ RUN echo " ---------------------------------------------------------------------
 #     Use the latest version with 'nvm use node'
 #     Install the latest LTS version with 'nvm install --lts'
 #     Use the latest LTS verison with 'nvm use --lts'
-RUN nvm install --lts
-RUN nvm use --lts
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm install --lts
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --lts
 RUN echo "Version de NodeJS en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN node --version
