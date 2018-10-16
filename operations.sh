@@ -183,12 +183,12 @@ clear
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-checkHealth $NOM_CONTENEUR_ROCKETCHAT
+checkHealth $NOM_CONTENEUR_IDE_MARGUERITE
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
 echo " ---------------------------------------------------------------------- "
-echo "   FIN de la provision Kytes  : "
+echo "   FIN de la provision $ALIAS_INFRA  : "
 echo " ---------------------------------------------------------------------- "
 # echo "    - \"UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME=$UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME\" "
 echo "  "
@@ -199,8 +199,8 @@ echo "  "
 echo "   Pressez la touche entrée pour terminer la provision. "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read ATTENTE_CREATION_UTILISATEUR_ROCKETCHAT
+read ATTENTE_INTERACTIVE
 
-# - Maintenant, examinons les logs du conteneur hubot :
+# - Maintenant, examinons les logs du conteneur ide :
 
-docker logs kytes_gitlab_service -f 
+docker logs NOM_CONTENEUR_IDE_MARGUERITE -f 
