@@ -5,7 +5,7 @@ services:
     hostname: 'meteor-ide.marguerite.io'
     container_name: "$NOM_CONTENEUR_IDE_MARGUERITE"
     # image: marguerite/meteor-ide:1.0.0
-    image: "$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/meteor-ide:$VERSION_IMAGE_MARGUERITE_STACK_METEOR"
+    image: "$IMAGES_MARGUERITE_COMPANY_NAME/meteor-ide:$VERSION_IMAGE_MARGUERITE_STACK_METEOR"
     build: 
       context: ./construction/conteneur-ide/
       # - contenu "./.env" : 
@@ -53,7 +53,7 @@ services:
     restart: always
   ide_mongo:
     # image: mongo:latest
-    image: marguerite/mongo:1.0.0    
+    image: $IMAGES_MARGUERITE_COMPANY_NAME/mongo:1.0.0    
     build: ./construction/mongodb/
     # hostname: "mongo"
     container_name: $NOM_CONTENEUR_MONGO
@@ -105,7 +105,7 @@ services:
 # --- Tests : Réseau
   sondereseau:
     # image: mongo:3.2
-    image: kytes/sonde-reseau:0.0.1
+    image: $IMAGES_MARGUERITE_COMPANY_NAME/sonde-reseau:0.0.1
     build: ./construction/tests/reseau/
     hostname: "marielle"
     container_name: 'marelle'
