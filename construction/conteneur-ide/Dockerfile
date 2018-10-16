@@ -1,4 +1,4 @@
-FROM centos:7
+FROM marguerite/meteor-stack:1.0.0
 # Labels éditeur
 
 # ARG / ENV : ici, on aura que des "ARGS", car on veut fixer les 
@@ -208,7 +208,9 @@ EXPOSE $MARGUERITE_METEOR_PORT/tcp
 # => NIVEAU CMD :  CMD ["/bin/bash"] , aisni l'ide pourra exécuter n'importe quelle commande, en taznt que user linux $MARGUERITE_USER_NAME 
 
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
-# ADD ./point-d-entree.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
+ADD maguerite-healthcheck.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
+RUN chmod +x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
+HEALTHCHECK CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
 # ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
 ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 # CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
