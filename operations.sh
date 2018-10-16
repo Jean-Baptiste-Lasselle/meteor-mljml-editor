@@ -17,7 +17,7 @@ export NOM_CONTENEUR_IDE_MARGUERITE=ide-marguerite
 export MARGUERITE_USER_NAME=jbl-devops
 export MARGUERITE_USER_PWD=marguerite
 
-export ALIAS_INFRA=kytes
+export ALIAS_INFRA=marguerite
 
 # -------------------------------------------------------------------------------------------------------------------
 # - Fonctions
