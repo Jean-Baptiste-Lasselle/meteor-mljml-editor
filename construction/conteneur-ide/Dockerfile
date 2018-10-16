@@ -3,14 +3,14 @@
 # La directive 'FROM' doit être templatisée avec Ansible, pour mapper les valeurs des 
 # variables d'environnement du fichier ["./.env"] suivantes : 
 # - 
-#    IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME=marguerite/
+#    IMAGES_MARGUERITE_COMPANY_NAME=marguerite
 #    IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=meteor-stack
 #    # Marguerite vous impose la compatibilité semver
 #    VERSION_IMAGE_MARGUERITE_STACK_METEOR=1.0.0
 # - 
 # Et le templating à effectuer est le suivant : 
 # - 
-#    FROM $IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
+#    FROM $IMAGES_MARGUERITE_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
 # - 
 # À noter, les variables d'environnement correspondantes existent dans le fichier ["./operations.sh"] et sont 
 # liées au valeur déclarées pour les variables correspondantes dans le fichier ["./.env"]
