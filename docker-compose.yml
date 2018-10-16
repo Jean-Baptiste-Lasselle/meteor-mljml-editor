@@ -115,8 +115,8 @@ services:
       - "$NOM_DU_RESEAU_MARGUERITE_DOCKER"
     # restart: 'always'
 networks:
-  # donc dans ./.env, NOM_DU_RESEAU_INFRA_DOCKER doit avoir pour valeur "reseau-marguerite"
-  reseau-marguerite:
+  # donc dans le fichier ["./.env]", la valriable $NOM_DU_RESEAU_MARGUERITE_DOCKER doit avoir pour valeur "marguerite-netdevops"
+  marguerite-netdevops:
     # name: 'reseau-marguerite'
     driver: bridge
 #     external: true 
