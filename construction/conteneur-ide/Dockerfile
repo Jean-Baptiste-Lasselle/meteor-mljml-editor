@@ -38,9 +38,26 @@ ENV NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR
 ARG CHEMIN_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
 ENV CHEMIN_PROJET_MARGUERITE_METEOR=$CHEMIN_PROJET_MARGUERITE_METEOR
 
+# ---- MARGUERITE / METEOR CONF ---- #
+# > You can use the application by pointing your web browser at localhost:3000. No Internet connection is required.
+# > This is the default command. Simply running meteor is the same as meteor run.
+# > To pass additional options to Node.js use the NODE_OPTIONS environment variable. For example: NODE_OPTIONS='--debug' or NODE_OPTIONS='--debug-brk'
+# > To specify a port to listen on (instead of the default 3000), use --port [PORT]. (The development server also uses port N+1 for the default MongoDB instance)
+# > For example: meteor run --port 4000 will run the development server on http://localhost:4000 and the development MongoDB instance on mongodb://localhost:4001.
+# > Run meteor help run to see the full list of options.
+
+ARG MARGUERITE_METEOR_PORT=4000
+ENV MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
+
+# NODE_OPTIONS='--debug --debug-brk'
+ARG MARGUERITE_METEOR_NODE_OPTIONS='--debug --debug-brk'
+ENV MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
 
 
+# ---- OPS ---- #
 USER root
+# Boîte à outils système
+RUN yum update -y && yum install -y curl wget net-tools vim git
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création de l'utilisateur Linux Marguerite                   + #"
@@ -70,13 +87,12 @@ RUN echo " "
 # On reprende le user root pour le reste du build de l'image du conteneur, le USER marguerite sera repris pour le RUN
 USER root
 
+
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du workspace IDE Marguerite                         + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN mkdir -p $WORKSPACE_IDE
-WORKDIR $WORKSPACE_IDE
-# Boîte à outils système
-RUN yum update -y && yum install -y curl wget net-tools vim git
+
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #"
@@ -148,10 +164,18 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # curl https://install.meteor.com/ | sh
 RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 RUN meteor --version
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Création du projet Meteor Marguerite                         + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+WORKDIR $WORKSPACE_IDE
+RUN meteor create $NOM_PROJET_MARGUERITE_METEOR
+WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
+
 
 # - EXECUTIONS - #
 USER $MARGUERITE_USER_NAME
-WORKDIR $WORKSPACE_IDE
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
-# ENTRYPOINT ["./point-d-entree.sh"] 
+# ADD ./point-d-entree.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
+# ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
+ENTRYPOINT ["meteor"]
 CMD ["/bin/bash"]
