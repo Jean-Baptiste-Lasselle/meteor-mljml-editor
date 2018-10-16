@@ -78,6 +78,9 @@ ENV NOM_DU_REPLICASET_MONGO=$NOM_DU_REPLICASET_MONGO
 
 # ---- OPS ---- #
 USER root
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + BUILD IMAGE MARGUERITE METEOR IDE                            + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # Boîte à outils système
 RUN yum update -y && yum install -y curl wget net-tools vim git
 
@@ -195,7 +198,7 @@ RUN echo "  "
 RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 USER $MARGUERITE_USER_NAME
-echo " Qui suis-je ? $(whoami)"
+RUN echo " Qui suis-je ? $(whoami)"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
