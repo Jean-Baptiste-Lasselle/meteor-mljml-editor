@@ -54,7 +54,13 @@ checkHealth () {
 # !! => Il y a un match avec les valeurs des mêmes variables d'envrionnement, dans le ficheir "./.env"
 export CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR=./construction/conteneur-ide/stack-meteor/
 export IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME=marguerite/
-export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=stack-meteor
+# L'image du conteneur définie dans './construction/conteneur-ide/stack-meteor/Dockerfile', mère
+# de l'image du runtime meteor de l'ide marguerite 
+export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=meteor-stack
+# L'image du conteneur définie dans './construction/conteneur-ide/Dockerfile', fille 
+# de l'image définie dans './construction/conteneur-ide/stack-meteor/Dockerfile'
+export IMAGE_MARGUERITE_IDE_METEOR_PRODUCT_NAME=meteor-ide
+export VERSION_IMAGE_MARGUERITE_IDE_METEOR=1.0.0
 export VERSION_IMAGE_MARGUERITE_STACK_METEOR=1.0.0
 
 
@@ -71,14 +77,13 @@ export NOM_CONTENEUR_IDE_MARGUERITE=$(cat ./.env|grep NOM_CONTENEUR_IDE_MARGUERI
 export CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR=$(cat ./.env|grep CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR | awk -F = '{print $2}')
 export IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME=$(cat ./.env|grep IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME | awk -F = '{print $2}')
 export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=$(cat ./.env|grep IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME | awk -F = '{print $2}')
+export IMAGE_MARGUERITE_IDE_METEOR_PRODUCT_NAME=$(cat ./.env|grep IMAGE_MARGUERITE_IDE_METEOR_PRODUCT_NAME | awk -F = '{print $2}')
 export VERSION_IMAGE_MARGUERITE_STACK_METEOR=$(cat ./.env|grep VERSION_IMAGE_MARGUERITE_STACK_METEOR | awk -F = '{print $2}')
 
 
-# Sauf celle-ci, qui est calculée dans l'exécution shell
+# Sauf celles-ci, qui sont calculées dans le flot de l'exécution shell
 export ID_IMAGE_MARGUERITE_STACK_METEOR=$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
-
-export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=ide-meteor
-export ID_IMAGE_MARGUERITE_IDE_METEOR=$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
+export ID_IMAGE_MARGUERITE_IDE_METEOR=$IMAGE_MARGUERITE_IDE_METEOR_PRODUCT_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_IDE_METEOR
 
 echo "  "
 echo " ---------------------------------------------------------------------- "
