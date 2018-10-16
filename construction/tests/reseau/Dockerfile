@@ -14,9 +14,9 @@ RUN echo "  "
 RUN netstat --version
 RUN netstat -tulpn
 RUN echo "  "
-RUN echo " Vérif installation iperf : "
+RUN echo " Vérif installation iperf3 : "
 RUN echo "  "
-RUN iperf --version
+RUN iperf3 --version
 RUN echo "  "
 RUN echo " Vérif installation git : "
 RUN echo "  "
