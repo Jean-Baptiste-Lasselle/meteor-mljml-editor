@@ -51,6 +51,12 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN adduser --quiet --disabled-password --shell /bin/sh --home /home/$MARGUERITE_USER_NAME --gecos "User" $MARGUERITE_USER_NAME
 # set password
 RUN echo "$MARGUERITE_USER_NAME:$MARGUERITE_USER_PWD" | chpasswd
+# Et on fait de l'utilisateur $MARGUERITE_USER_NAME, un administrateur (aura le droit d'utiliser sudo?...).
+# Pour CentOS le groupe "sudo"  n'existe pas, mais c'est le groupe "wheel" qui existe, et qu'il faut utiliser
+RUN usermod -aG wheel $MARGUERITE_USER_NAME
+# Pour Debian / Ubuntu le groupe "wheel"  n'existe pas, mais c'est le groupe "sudo" qui existe, et qu'il faut utiliser
+# RUN usermod -aG sudo $MARGUERITE_USER_NAME
+
 USER $MARGUERITE_USER_NAME
 
 RUN echo " "
@@ -60,6 +66,10 @@ RUN echo " Qui suis-je ? $(whoami)"
 RUN echo " Ma maison est : [$HOME]"
 RUN ls -all $HOME
 RUN echo " "
+
+# On reprende le user root pour le reste du build de l'image du conteneur, le USER marguerite sera repris pour le RUN
+USER root
+
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du workspace IDE Marguerite                         + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
@@ -138,6 +148,10 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # curl https://install.meteor.com/ | sh
 RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 RUN meteor --version
+
+# - EXECUTIONS - #
+USER $MARGUERITE_USER_NAME
+WORKDIR $WORKSPACE_IDE
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
 # ENTRYPOINT ["./point-d-entree.sh"] 
 CMD ["/bin/bash"]
