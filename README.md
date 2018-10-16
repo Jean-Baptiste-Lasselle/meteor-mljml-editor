@@ -126,3 +126,27 @@ jibl@pc-alienware-jib:~$ sort --version-sort ./liste-versions-NVM-a-trier-2018-1
 0.33.11
 jibl@pc-alienware-jib:~$ 
 ```
+
+# Tests à faire pour collègues
+
+## dans un commentaire sur une vidéo tuto youtube
+
+https://www.youtube.com/watch?v=rQX-9WqzchQ&list=PLLnpHn493BHECNl9I8gwos-hEfFrer7TV&index=8
+
+
+```bash
+@LevelUpTuts Hi Scott, just a word with a thank you for your work, which allowed to dive in very quickly into meteor.
+When you explain about the "checkboxes", here one thing you may confuse your everyday developer audience : 
+I am gonna test it to confirm, but I think that just adding a new "double-brackets variable", with identifier 'checked', in the resolution template definition, in './resolution.html', involved modifying you database logic scheme. Meaning its just as if you had added a new column to an old school SQL-table : when Resolutions.update() is called, it causes a classic persistence transaction, updating in the database, every object in the Resolutions Javascript Collection, by Id, bulk inserting all  "columns" (if there can be columns concept in mongodb collection based storage...) defined in each entry of the Javascript colection.
+One question I will find the answer to (with tests), is: say you check 3 of 7 items in the list, and the remaining 4 where inserted without a 'checked' "column". Will then those 4 then have a 'checked' property, with a 'null' value?
+
+
+Put in other words, Meteor infers Object Relational Mapping Persistence from templates definitions.
+
+
+Something you have to mention, so that old school developers can match notions between their development world, and Meteor development world.  
+
+
+I'll be back on those questions, mirroring on github.
+
+```
