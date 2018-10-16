@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ide-meteor:
+  ide_meteor:
     hostname: 'meteor-ide.marguerite.io'
     container_name: "$NOM_CONTENEUR_IDE_MARGUERITE"
     image: marguerite/meteor-ide:1.0.0
@@ -50,7 +50,7 @@ services:
 #       devops:
 #         ipv4_address: 192.168.160.8
     restart: always
-  ide-mongo:
+  ide_mongo:
     # image: mongo:latest
     image: marguerite/mongo:1.0.0    
     build: ./construction/mongodb/
