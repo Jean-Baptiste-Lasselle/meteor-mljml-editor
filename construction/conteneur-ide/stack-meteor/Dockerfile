@@ -202,9 +202,11 @@ RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This l
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "Version de NVM installée : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN $NVM_DIR/nvm.sh
-RUN $NVM_DIR/nvm.sh --version
-RUN nvm
+# RUN $NVM_DIR/nvm.sh
+# RUN echo $NVM_DIR && source $NVM_DIR/nvm.sh &&  $NVM_DIR/nvm.sh --version
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm --version
+
+RUN nvm --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
