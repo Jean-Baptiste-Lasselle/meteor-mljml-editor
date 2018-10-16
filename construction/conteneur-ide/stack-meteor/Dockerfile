@@ -63,6 +63,9 @@ ENV NOM_DU_REPLICASET_MONGO=$NOM_DU_REPLICASET_MONGO
 
 # ---- OPS ---- #
 USER root
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + BUILD IMAGE MARGUERITE METEOR STACK                          + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # Boîte à outils système
 RUN yum update -y && yum install -y curl wget net-tools vim git
 
