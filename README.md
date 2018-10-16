@@ -150,3 +150,36 @@ Something you have to mention, so that old school developers can match notions b
 I'll be back on those questions, mirroring on github.
 
 ```
+
+# ANNEXE : NVM
+
+## Info 1 : de la dépendance au compilateur C++, de l'arrivée des binaires dans les releases NodeJS >= `0.8.6`
+
+source : https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/
+
+> 
+> Step 1 (Optional): Ensure your system has the appropriate C++ compiler
+> 
+> In some cases, like when installing Node.js releases from their source or installing versions of Node.js before 0.8.6 (when the project started shipping binaries), you'll need to ensure that your system has the appropriate C++ build tools.
+> 
+> For LTS and modern releases, you will not need this step. That said, it's a nice to have to ensure that the majority of requirements are met in any scenario.
+> 
+> On macOS, you've got two options for a C++ compiler: the full XCode application or the stand-alone Command Line Tools portion of Xcode.
+> 
+> To get these on macOS, you can follow these steps:
+> 
+>     Open your terminal of choice
+>     Run xcode-select --install as a command
+>         A popup will appear
+>         Select Install
+>     Allow the download to run to completion
+>     If the installation went uninterrupted, you should have the necessary tools to use nvm!
+> 
+> On Linux, the C++ compiler will vary from distribution to distribution. For example, on Debian and Ubuntu, you'll need to install build-tools and libssl-dev, but this may be different on your given Linux distribution.
+> 
+> To get build-tools and libssl-dev on Debuan and Ubuntu distributions, you can run these commands:
+> 
+> > sudo apt-get install build-essential # Install the build-essential package - let this run to completion
+> 
+> > sudo apt-get install libssl-dev # Install the libssl-dev package - also let this one run to completion
+> 
