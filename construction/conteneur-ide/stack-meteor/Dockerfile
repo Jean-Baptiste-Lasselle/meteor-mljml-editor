@@ -245,6 +245,9 @@ RUN echo "  "
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 # 
 # 
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # curl https://install.meteor.com/ | sh
 RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
@@ -252,15 +255,13 @@ RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 # iol ne s'agit que de faire un afficahge de version, pendant la construction d'une image, ...
 RUN export PATH=$PATH:$HOME/.meteor && meteor --allow-superuser --version
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Création du projet Meteor Marguerite                         + #"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
+
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Création du projet Meteor de l'utilisateur Marguerite        + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 USER $MARGUERITE_USER_NAME
 RUN echo " Qui suis-je ? $(whoami)"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # ++ Vérification valeurs variables d'environnement : 
 
