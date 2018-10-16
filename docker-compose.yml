@@ -1,0 +1,87 @@
+version: '3'
+
+services:
+
+  marguerite-ide:
+#     hostname: 'meteor-ide.marguerite.io'
+    container_name: "$NOM_CONTENEUR_IDE_MARGUERITE"
+    image: marguerite/meteor-ide:1.0.0
+    build: 
+      context: ./construction/conteneur-ide/
+      args:
+        # Les variables globales de nom identique, sont définies dans le fichier ".env", propre à Docker Compose
+        - WORKSPACE_IDE=$IN_CONTAINER_WORKSPACE_IDE
+        - MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
+        - MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+    volumes:
+      - ./marguerite/ide/workspace:$IN_CONTAINER_WORKSPACE_IDE:rw
+    environment:
+      - WORKSPACE_IDE=$IN_CONTAINER_WORKSPACE_IDE
+      - MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
+      - MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+    ports:
+      - 3030:$MARGUERITE_METEOR_PORT
+    expose:
+      - "$MARGUERITE_METEOR_PORT"
+#     depends_on:
+      # - mongo
+      # + Depuis utilisation d'un build image custom mongo avec HEALTHCHECK pour le
+      # + conteneur 'mongo-init-replica', cf. ./mongo-init-replica/construction/replicaset-health-check
+      # + mais plus depusi l'avènement du soudeur
+      # - mongo-init-replica
+    networks:
+      - "$NOM_DU_RESEAU_INFRA_DOCKER"
+#       devops:
+#         ipv4_address: 192.168.160.8
+    restart: always
+    
+  nginx:
+    image: nginx
+#     hostname: "proxy"
+    container_name: "reverseproxy"
+    restart: always
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:rw
+      - ./nginx/logs/:/var/log/nginx/:rw
+    ports:
+      - "80:8030"
+      - "443:7443"
+      - "222:322"
+    expose:
+      - "8030"
+      - "7443"
+#      - "322"
+    environment:
+#       - NGINX_HOST=kytes.io
+      - NGINX_PORT=8030
+      - NGINX_SSL=7443
+      - NGINX_SSH=322
+    networks:
+      - "$NOM_DU_RESEAU_INFRA_DOCKER"
+    depends_on:
+      - gitlab
+    restart: always
+# --- Tests : Réseau
+  sondereseau:
+    # image: mongo:3.2
+    image: kytes/sonde-reseau:0.0.1
+    build: ./tests/sondereseau/
+    hostname: "marielle"
+    container_name: 'marelle'
+    tty: true
+#     command: yum update -y && yum install -y iputils && ping -c 4 localhost
+    networks:
+      # - "$NOM_DU_RESEAU_INFRA_DOCKER"
+      - "$NOM_DU_RESEAU_MARGUERITE_DOCKER"
+    # restart: 'always'
+networks:
+  # donc dans ./.env, NOM_DU_RESEAU_INFRA_DOCKER doit avoir pour valeur "reseau-marguerite"
+  reseau-marguerite:
+    # name: 'reseau-marguerite'
+    driver: bridge
+#     external: true 
+#     ipam:
+#       config:
+#         - subnet: 192.168.160.0/24
+#         - gateway: 192.168.160.1
+#         # - gateway: 172.16.1.1
