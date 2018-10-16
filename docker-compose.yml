@@ -77,7 +77,7 @@ services:
   sondereseau:
     # image: mongo:3.2
     image: kytes/sonde-reseau:0.0.1
-    build: ./tests/sondereseau/
+    build: ./construction/tests/reseau/
     hostname: "marielle"
     container_name: 'marelle'
     tty: true
