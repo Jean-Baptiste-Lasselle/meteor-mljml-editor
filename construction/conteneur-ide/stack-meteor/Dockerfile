@@ -269,7 +269,10 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # 
 # curl https://install.meteor.com/ | sh
 RUN sh -c "$(curl -sSL https://install.meteor.com/)"
-RUN meteor --version
+# On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
+# la valeur du chemin PATH=$PATH:~/opt/bin dans le PATH
+RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+RUN export PATH=$PATH:$HOME/.meteor && meteor --version
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du projet Meteor Marguerite                         + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
