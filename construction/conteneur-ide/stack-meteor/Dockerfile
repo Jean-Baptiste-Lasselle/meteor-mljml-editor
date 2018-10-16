@@ -193,8 +193,9 @@ RUN echo "# ++ Configuration Marguerite Meteor IDE ++ #" >> /etc/profile
 RUN echo "# +++++++++++++++++++++++++++++++++++++++++ #" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\" # This loads nvm" >> /etc/profile
 RUN echo "[ -s \"$NVM_DIR/bash_completion\" ] && \\. \"$NVM_DIR/bash_completion\" # This loads nvm bash_completion"  >> /etc/profile
-# Chargement de NVM, pour l'exécutioon du build de l'image docker
+RUN echo "# Chargement de NVM, pour l'exécution du build de l'image docker"
 RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+RUN [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
