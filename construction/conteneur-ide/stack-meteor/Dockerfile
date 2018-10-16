@@ -242,7 +242,7 @@ RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --delete-prefix -
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Versions de NodeJS / NPM en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN echo NVM_DIR=$NVM_DIR && node --version
+RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && node --version
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && npm --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "  "
