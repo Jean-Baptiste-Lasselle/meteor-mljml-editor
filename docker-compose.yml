@@ -1,24 +1,36 @@
 version: '3'
 
 services:
-
   marguerite-ide:
-#     hostname: 'meteor-ide.marguerite.io'
+    hostname: 'meteor-ide.marguerite.io'
     container_name: "$NOM_CONTENEUR_IDE_MARGUERITE"
     image: marguerite/meteor-ide:1.0.0
     build: 
       context: ./construction/conteneur-ide/
+      # - contenu "./.env" : 
+      # ---- 
+      # IN_CONTAINER_WORKSPACE_IDE=/marguerite/ide
+      # MARGUERITE_METEOR_PORT=6000
+      # MARGUERITE_METEOR_NODE_OPTIONS="--debug --debug-brk"
+      # NOM_CONTENEUR_IDE_MARGUERITE=ide-marguerite
+      # MARGUERITE_USER_NAME=jbl-devops
+      # MARGUERITE_USER_PWD=marguerite
+      # ---- 
       args:
         # Les variables globales de nom identique, sont définies dans le fichier ".env", propre à Docker Compose
         - WORKSPACE_IDE=$IN_CONTAINER_WORKSPACE_IDE
         - MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
         - MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+        - MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
+        - MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
     volumes:
       - ./marguerite/ide/workspace:$IN_CONTAINER_WORKSPACE_IDE:rw
     environment:
       - WORKSPACE_IDE=$IN_CONTAINER_WORKSPACE_IDE
       - MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
       - MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+      - MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
+      - MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
     ports:
       - 3030:$MARGUERITE_METEOR_PORT
     expose:
@@ -57,7 +69,7 @@ services:
       - NGINX_SSL=7443
       - NGINX_SSH=322
     networks:
-      - "$NOM_DU_RESEAU_INFRA_DOCKER"
+      - "$NOM_DU_RESEAU_MARGUERITE_DOCKER"
     depends_on:
       - gitlab
     restart: always
