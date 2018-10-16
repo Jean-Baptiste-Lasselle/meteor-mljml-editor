@@ -160,8 +160,12 @@ RUN echo " ---------------------------------------------------------------------
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# ++ BOn, eh ben on s'exécute : 
-RUN export NVM_DIR="$HOME/.nvm"
+# 
+# ++ Bon, eh ben on s'exécute : 
+# RUN export NVM_DIR="$HOME/.nvm"
+ARG NVM_DIR="$HOME/.nvm"
+ENV NVM_DIR=$NVM_DIR
+# Les deux lignes ci-dessous DEVRONT, être présentes dans le mode CMD du conteneur
 RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
