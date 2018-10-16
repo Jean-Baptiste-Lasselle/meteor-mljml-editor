@@ -240,6 +240,27 @@ RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && npm --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "  "
 
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+# + Installation de Meteor + #
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+# 
+# 
+# curl https://install.meteor.com/ | sh
+RUN sh -c "$(curl -sSL https://install.meteor.com/)"
+# On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
+# la valeur du chemin PATH=$PATH:~/opt/bin dans le PATH
+RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+RUN export PATH=$PATH:$HOME/.meteor && meteor --version
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Création du projet Meteor Marguerite                         + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
+USER $MARGUERITE_USER_NAME
+RUN echo " Qui suis-je ? $(whoami)"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
 # ++ Vérification valeurs variables d'environnement : 
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
@@ -257,27 +278,9 @@ RUN echo " MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS "
 RUN echo "  "
 RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-USER $MARGUERITE_USER_NAME
-RUN echo " Qui suis-je ? $(whoami)"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-# + Installation de Meteor + #
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-# 
-# 
-# curl https://install.meteor.com/ | sh
-RUN sh -c "$(curl -sSL https://install.meteor.com/)"
-# On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
-# la valeur du chemin PATH=$PATH:~/opt/bin dans le PATH
-RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
-RUN export PATH=$PATH:$HOME/.meteor && meteor --version
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Création du projet Meteor Marguerite                         + #"
-RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
 WORKDIR $WORKSPACE_IDE
-RUN meteor create $NOM_PROJET_MARGUERITE_METEOR
+RUN export PATH=$PATH:$HOME/.meteor && meteor create $NOM_PROJET_MARGUERITE_METEOR
 WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
 
 EXPOSE $MARGUERITE_METEOR_PORT/tcp
@@ -290,6 +293,8 @@ EXPOSE $MARGUERITE_METEOR_PORT/tcp
 
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
 ADD point-d-entree.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
+RUN chmod +x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
+
 ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
 # ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 # CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
