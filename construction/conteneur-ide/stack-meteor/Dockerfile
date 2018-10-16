@@ -105,8 +105,8 @@ RUN echo " Ma maison est : [$HOME]"
 RUN ls -all $HOME
 RUN echo " "
 
-# On reprende le user root pour le reste du build de l'image du conteneur, le USER marguerite sera repris pour le RUN
-# USER root
+# On doit reprende le user root pour le reste du build de l'image du conteneur, le USER marguerite sera repris pour le RUN
+USER root
 # eh ben non, je vais essayer de continuer avec le user marguerite.... Quoi que ...
 
 
