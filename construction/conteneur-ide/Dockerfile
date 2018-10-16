@@ -36,7 +36,7 @@ ADD marguerite-healthcheck.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
 USER root
 RUN chmod +x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
 USER $MARGUERITE_USER_NAME
-HEALTHCHECK CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
+HEALTHCHECK --interval=1s --timeout=30s --retries=150 CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
 # ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
 # CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 CMD ["/bin/bash"]
