@@ -252,7 +252,19 @@ RUN echo "  "
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 # 
 # 
+
+RUN chown -R  $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP /home/jbl-devops
+
 USER $MARGUERITE_USER_NAME
+
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Vérification contenu du répertoire /home :  "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN ls -all /home
+RUN echo " Vérification contenu du répertoire /home/jibl [=$HOME] :  "
+RUN ls -all /home/jbl-devops
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
