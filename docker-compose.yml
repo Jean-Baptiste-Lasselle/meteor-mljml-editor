@@ -24,6 +24,7 @@ services:
         - MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
         - MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
         - NOM_DU_REPLICASET_MONGO
+        - NVM_DIR=/root/nvm
     volumes:
       - ./marguerite/ide/workspace:$IN_CONTAINER_WORKSPACE_IDE:rw
     environment:
@@ -33,6 +34,7 @@ services:
       - MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME
       - MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
       - NOM_DU_REPLICASET_MONGO
+      - NVM_DIR=/root/nvm
     ports:
       - 3030:$MARGUERITE_METEOR_PORT
     expose:
