@@ -228,7 +228,12 @@ RUN echo " ---------------------------------------------------------------------
 #     Use the latest LTS verison with 'nvm use --lts'
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm install --lts
 RUN echo NVM_DIR=$NVM_DIR && source $NVM_DIR/nvm.sh && nvm use --delete-prefix --lts
-RUN echo "Version de NodeJS en vigueur : "
+
+RUN echo " Verif executable NodeJS installé /usr/bin/node : "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN ls -all /usr/bin/node
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Version de NodeJS en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN node --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
