@@ -271,10 +271,12 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # curl https://install.meteor.com/ | sh
 RUN sh -c "$(curl -sSL https://install.meteor.com/)"
-# On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout de
-# la valeur du chemin PATH=$PATH:~/opt/bin dans le PATH
-RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 
+# On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout dans PATH, de
+# la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
+USER root
+RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+USER $MARGUERITE_USER_NAME
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du projet Meteor de l'utilisateur Marguerite        + #"
@@ -306,7 +308,7 @@ RUN echo " ---------------------------------------------------------------------
 RUN echo " Vérification version Framework Meteor :  "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 # Il ne s'agit que de faire un afficahge de version, pendant la construction d'une image, ...
-RUN export PATH=$PATH:$HOME/.meteor && meteor --allow-superuser --version
+RUN export PATH=$PATH:$HOME/.meteor && meteor --version
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Création du projet Meteor [$NOM_PROJET_MARGUERITE_METEOR] :  "
