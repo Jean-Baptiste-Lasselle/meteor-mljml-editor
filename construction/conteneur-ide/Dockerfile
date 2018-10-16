@@ -27,9 +27,9 @@ ENV WORKSPACE_IDE=/marguerite/ide/esp-travail/
 ARG NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
 ENV NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
 
-WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
+# WORKDIR $WORKSPACE_IDE
 
-EXPOSE $MARGUERITE_METEOR_PORT/tcp
+# EXPOSE $MARGUERITE_METEOR_PORT/tcp
 # ---- EXECUTION ---- #
 # ++ PRINCIPE : 
 # => NIVEAU IMAGE DE CONTENEUR STACK-METEOR :: On installe NVM, NODEJS, et METEOR, et donc il suffit de changer les variables d'environnement, au docker build, pour changer les versions du stack meteor
@@ -43,8 +43,11 @@ USER root
 RUN echo " VERIF WORKSPACE_IDE=$WORKSPACE_IDE"
 RUN echo " VERIF NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR"
 RUN echo " VERIF REP HEALTHCHECK=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/"
-RUN echo " contenu du répertoire, s'il existe  : "
+RUN echo " contenu du répertoire WORKSPACE_IDE, s'il existe  : "
+RUN ls -all $WORKSPACE_IDE
+RUN echo " contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
 RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
+RUN exit 2
 RUN chmod +x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
 USER $MARGUERITE_USER_NAME
 HEALTHCHECK --interval=1s --timeout=30s --retries=150 CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
