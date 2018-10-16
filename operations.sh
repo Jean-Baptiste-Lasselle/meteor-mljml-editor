@@ -1,6 +1,17 @@
 #!/bin/bash
-
+# -------------------------------------------------------------------------------------------------------------------
+# - ["./.env"] :
+# -------------------------------------------------------------------------------------------------------------------
+# IN_CONTAINER_WORKSPACE_IDE=/marguerite/ide
+# MARGUERITE_METEOR_PORT=6000
+# MARGUERITE_METEOR_NODE_OPTIONS="--debug --debug-brk"
+# NOM_CONTENEUR_IDE_MARGUERITE=ide_meteor_marguerite
+# MARGUERITE_USER_NAME=jbl-devops
+# MARGUERITE_USER_PWD=marguerite
+# NOM_DU_RESEAU_MARGUERITE_DOCKER=marguerite-netdevops
+# -------------------------------------------------------------------------------------------------------------------
 # - ENV 
+# -------------------------------------------------------------------------------------------------------------------
 export NOM_CONTENEUR_IDE_MARGUERITE=ide-marguerite
 
 export MARGUERITE_USER_NAME=jbl-devops
@@ -8,8 +19,9 @@ export MARGUERITE_USER_PWD=marguerite
 
 export ALIAS_INFRA=kytes
 
+# -------------------------------------------------------------------------------------------------------------------
 # - Fonctions
-# --------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------
 # 
 # Cette fonction permet d'attendre que le conteneur soit dans l'état healthy
 # Cette fonction prend un argument, nécessaire sinon une erreur est générée (TODO: à implémenter avec exit code)
@@ -33,15 +45,7 @@ checkHealth () {
 	rm -f ./check-health.coquelicot
 	# DEBUG LOGS
 	echo " provision-$ALIAS_INFRA-  ------------------------------------------------------------------------------ " 
-	echo " provision-$ALIAS_INFRA-  - Contenu du répertoire [/etc/gitlab] dans le conteneur [$NOM_DU_CONTENEUR_INSPECTE]:" 
-	echo " provision-$ALIAS_INFRA-  - " 
-	sudo docker exec -it $NOM_DU_CONTENEUR_INSPECTE /bin/bash -c "ls -all /etc/gitlab"
 	echo " provision-$ALIAS_INFRA-  ------------------------------------------------------------------------------ " 
-	echo " provision-$ALIAS_INFRA-  - Existence du fichier [/etc/gitlab/gitlab.rb] dans le conteneur  [$NOM_DU_CONTENEUR_INSPECTE]:" 
-	echo " provision-$ALIAS_INFRA-  - "
-	sudo docker exec -it $NOM_DU_CONTENEUR_INSPECTE /bin/bash -c "ls -all /etc/gitlab/gitlab.rb" 
-	echo " provision-$ALIAS_INFRA-  - " 
-	echo " provision-ALIAS_INFRA-  ------------------------------------------------------------------------------ " 
 }
 
 # - OPS 
@@ -52,15 +56,15 @@ checkHealth () {
 # export UTILISATEUR_HUBOT_ROCKETCHAT_PWD=$(cat ./docker-compose.yml|grep ROCKETCHAT_PASSWORD | awk -F = '{print $2}')
 
 # Depuis l'utiliation du fichier de variables globales [.env]
-export UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME=$(cat ./.env|grep UTILISATEUR_ROCKETCHAT_HUBOT | grep -v MDP | awk -F = '{print $2}')
-export UTILISATEUR_HUBOT_ROCKETCHAT_PWD=$(cat ./.env|grep UTILISATEUR_ROCKETCHAT_HUBOT_MDP | awk -F = '{print $2}')
+export MARGUERITE_USER_NAME=$(cat ./.env|grep MARGUERITE_USER_NAME | awk -F = '{print $2}')
+export MARGUERITE_USER_PWD=$(cat ./.env|grep MARGUERITE_USER_PWD | awk -F = '{print $2}')
 
 
 
 # - Je rends exécutables les scripts invoqués dans la présente recette
-chmod +x ./initialisation-iaac-cible-deploiement.sh
+# chmod +x ./initialisation-iaac-cible-deploiement.sh
 # J'initialise tout de suite la cible de déploiement
-./initialisation-iaac-cible-deploiement.sh
+# ./initialisation-iaac-cible-deploiement.sh
 
 
 
@@ -72,7 +76,7 @@ echo "  "
 docker images
 echo "  "
 echo " ---------------------------------------------------------------------- "
-echo "  "
+echo "  MEttez éventuellement à jour votre ./initialisation-iaac-cible-deploiement.sh"
 echo "  Pressez la touche entrée.  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
