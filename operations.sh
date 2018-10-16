@@ -77,6 +77,8 @@ export VERSION_IMAGE_MARGUERITE_STACK_METEOR=$(cat ./.env|grep VERSION_IMAGE_MAR
 # Sauf celle-ci, qui est calculée dans l'exécution shell
 export ID_IMAGE_MARGUERITE_STACK_METEOR=$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
 
+export IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME=ide-meteor
+export ID_IMAGE_MARGUERITE_IDE_METEOR=$IMAGE_MARGUERITE_STACK_METEOR_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
 
 echo "  "
 echo " ---------------------------------------------------------------------- "
@@ -108,6 +110,10 @@ echo "  "
 echo "  "
 echo "  "
 docker rmi --force $ID_IMAGE_MARGUERITE_STACK_METEOR
+docker rmi --force $ID_IMAGE_MARGUERITE_IDE_METEOR
+
+marguerite/meteor-ide                  1.0.0               c1738e033440        11 minutes ago      1.9GB
+marguerite/meteor-stac
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
