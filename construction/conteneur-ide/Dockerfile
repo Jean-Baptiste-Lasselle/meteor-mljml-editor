@@ -50,9 +50,11 @@ ARG MARGUERITE_METEOR_PORT=4000
 ENV MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
 
 # NODE_OPTIONS='--debug --debug-brk'
-ARG MARGUERITE_METEOR_NODE_OPTIONS='--debug --debug-brk'
+# ARG MARGUERITE_METEOR_NODE_OPTIONS='--debug --debug-brk'
+ARG MARGUERITE_METEOR_NODE_OPTIONS="--debug --debug-brk"
 ENV MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
-
+# Ainsi la variable d'envrionnement existera àau lancement du cotneneur, et définira la valeur de NODE_OPTIONS, à l'exécution meteor run
+ENV NODE_OPTIONS
 
 # ---- OPS ---- #
 USER root
@@ -148,11 +150,27 @@ RUN echo "Version de NodeJS en vigueur : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN node --version
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-
+RUN echo "  "
 
 # ++ Vérification valeurs variables d'environnement : 
 
-
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " Vérification valeurs variables d'environnement :  "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN echo " MARGUERITE_USER_NAME=$MARGUERITE_USER_NAME "
+RUN echo "  "
+RUN echo " WORKSPACE_IDE=$WORKSPACE_IDE "
+RUN echo "  "
+RUN echo " NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR "
+RUN echo "  "
+RUN echo " MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT "
+RUN echo "  "
+RUN echo " MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS "
+RUN echo "  "
+RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR "
+RUN echo " ----------------------------------------------------------------------------------------------------------- "
+USER $MARGUERITE_USER_NAME
+echo " Qui suis-je ? $(whoami)"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
@@ -171,11 +189,12 @@ WORKDIR $WORKSPACE_IDE
 RUN meteor create $NOM_PROJET_MARGUERITE_METEOR
 WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
 
+EXPOSE $MARGUERITE_METEOR_PORT/tcp
+# ---- EXECUTION ---- #
 
-# - EXECUTIONS - #
-USER $MARGUERITE_USER_NAME
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
 # ADD ./point-d-entree.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
 # ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
-ENTRYPOINT ["meteor"]
+ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
+# CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 CMD ["/bin/bash"]
