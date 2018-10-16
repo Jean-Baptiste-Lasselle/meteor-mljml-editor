@@ -106,7 +106,8 @@ RUN ls -all $HOME
 RUN echo " "
 
 # On reprende le user root pour le reste du build de l'image du conteneur, le USER marguerite sera repris pour le RUN
-USER root
+# USER root
+# eh ben non, je vais essayer de continuer avec le user marguerite.... Quoi que ...
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
@@ -142,6 +143,8 @@ RUN echo " ---------------------------------------------------------------------
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Installation de NVM ... "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
+RUN touch ~/.bash_profile
+# un fichier "~/.bash_profile" doit exister dans le $HOME du user marguerite
 RUN sh -c "$(curl -sSL https://raw.githubusercontent.com/creationix/nvm/v$AVANT_DERNIRE_VERSION_NVM/install.sh)"
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 #  ----------------------------------------------------------------------------------------------------------- 
