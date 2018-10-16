@@ -26,7 +26,7 @@ services:
         - NOM_DU_REPLICASET_MONGO
         - NVM_DIR=/root/nvm
     volumes:
-      - ./marguerite/ide/workspace:$IN_CONTAINER_WORKSPACE_IDE:rw
+      - $REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE:$IN_CONTAINER_WORKSPACE_IDE:rw
     environment:
       - WORKSPACE_IDE=$IN_CONTAINER_WORKSPACE_IDE
       - MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
@@ -99,7 +99,7 @@ services:
     networks:
       - "$NOM_DU_RESEAU_MARGUERITE_DOCKER"
     depends_on:
-      - gitlab
+      - ide_meteor
     restart: always
 # --- Tests : Réseau
   sondereseau:
