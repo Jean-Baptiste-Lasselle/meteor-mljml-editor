@@ -320,7 +320,7 @@ RUN echo " ---------------------------------------------------------------------
 RUN echo " Création du projet Meteor [$NOM_PROJET_MARGUERITE_METEOR] :  "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN export PATH="$PATH:$HOME/.meteor" && echo " VERIF PATH=[$PATH] " && meteor create $NOM_PROJET_MARGUERITE_METEOR
-WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
+
 
 EXPOSE $MARGUERITE_METEOR_PORT/tcp
 # ---- EXECUTION ---- #
@@ -330,8 +330,10 @@ EXPOSE $MARGUERITE_METEOR_PORT/tcp
 # => NIVEAU ENTRYPOPINT :  on fait le meteor run --port 
 # => NIVEAU CMD :  CMD ["/bin/bash"] , aisni l'ide pourra exécuter n'importe quelle commande, en taznt que user linux $MARGUERITE_USER_NAME 
 
+WORKDIR $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR
+# ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
+ENTRYPOINT ["./point-d-entree.sh"] 
 
-ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
 # ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 # CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 CMD ["/bin/bash"]
