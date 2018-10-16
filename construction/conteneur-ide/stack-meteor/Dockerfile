@@ -252,8 +252,8 @@ EXPOSE $MARGUERITE_METEOR_PORT/tcp
 # => NIVEAU CMD :  CMD ["/bin/bash"] , aisni l'ide pourra exécuter n'importe quelle commande, en taznt que user linux $MARGUERITE_USER_NAME 
 
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
-# ADD ./point-d-entree.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
-# ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
-ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
+ADD point-d-entree.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh
+ENTRYPOINT ["$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/point-d-entree.sh"] 
+# ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 # CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 CMD ["/bin/bash"]
