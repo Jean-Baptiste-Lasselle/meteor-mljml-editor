@@ -116,6 +116,8 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création du workspace IDE Marguerite                         + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN mkdir -p $WORKSPACE_IDE
+# Le répertoire /marguerite doit appartenir au user marguerite.
+RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP /marguerite
 # Le workspace doit appartenir au user marguerite.
 RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE
 
