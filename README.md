@@ -11,7 +11,7 @@ If you snapshot/restore Virtual Machines all over, you might also have problems 
 AS for its use, see [this paragraph](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons#provision-et-initialisation-du-cycle-iaac-lets-rock-with-you)
 
 The very point of that recipe, is that is has parameters, which allow you to change (`./.env`), at runtime : 
-
+( _Nota Bene : NVM, NODEJS, and METEOR version configuration are not yet implemented, will be soon! _) 
 
 | Variable | What it changes | Example value | 
 | -------- | --------------- | ------------- |
