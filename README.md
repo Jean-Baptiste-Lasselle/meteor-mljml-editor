@@ -1,3 +1,4 @@
+
 # Objet de ce repo (purpose)
 
 This repo brings you a provisioning recipe, for a container embedding a [Meteor Framework](https://www.meteor.com/) runtime.
@@ -45,112 +46,11 @@ MARGUERITE_NODEJS_VERSION=8.12.0
 MARGUERITE_NPM_VERSION=6.4.1
 ```
 
-# lnl
-
-Dans la version courante, j'ai un problème avec le démarrage de mon conteneur ide avec docker-compose, mais par contre, le test suivant montre que j'ai bien réussit à me construire un cotnen,eur avec un runtime Meteor, unprojet meteor tout prêt : 
-
-```bash
-[jibl@pc-100 marguerite]$ docker logs -f ide_meteor_marguerite
- -------------------------------------------------------------- 
- VERIFICATIONS POINT D'ENTREE : 
- -------------------------------------------------------------- 
-  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jbl-devops/.meteor  
-  NODE_OPTIONS=  
-  NOM_PROJET_MARGUERITE_METEOR==jbl-projet-meteor  
-  Environnement METEOR : 
-HOSTNAME=meteor-ide.marguerite.io
-NOM_PROJET_MARGUERITE_METEOR==jbl-projet-meteor
-CHEMIN_PROJET_MARGUERITE_METEOR=/marguerite/ide/esp-travail/=jbl-projet-meteor
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jbl-devops/.meteor
-PWD=/marguerite/ide/esp-travail/=jbl-projet-meteor
- -------------------------------------------------------------- 
-/marguerite/ide/esp-travail/=jbl-projet-meteor
-total 12
-drwxr-xr-x. 1 jbl-devops wheel 125 Oct 17 03:29 .
-drwxr-xr-x. 1 jbl-devops wheel  82 Oct 17 03:30 ..
--rw-r--r--. 1 jbl-devops wheel  14 Oct 17 03:29 .gitignore
-drwxr-xr-x. 1 jbl-devops wheel 139 Oct 17 03:29 .meteor
-drwxr-xr-x. 1 jbl-devops wheel  54 Oct 17 03:29 client
--rw-r--r--. 1 jbl-devops wheel  59 Oct 17 03:29 package-lock.json
--rw-r--r--. 1 jbl-devops wheel 576 Oct 17 03:29 package.json
-drwxr-xr-x. 1 jbl-devops wheel  21 Oct 17 03:29 server
-drwxr-xr-x. 1 jbl-devops wheel  21 Oct 17 03:29 tests
- -------------------------------------------------------------- 
-[[[[[ /marguerite/ide/esp-travail/=jbl-projet-meteor ]]]]]
-
-=> Started proxy.
-=> Started MongoDB.
-W20181017-03:31:47.504(0)? (STDERR) /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:475
-W20181017-03:31:47.739(0)? (STDERR) }).run();
-W20181017-03:31:47.740(0)? (STDERR)    ^
-W20181017-03:31:47.740(0)? (STDERR) 
-W20181017-03:31:47.740(0)? (STDERR) Error: 
-W20181017-03:31:47.741(0)? (STDERR) The @babel/runtime npm package could not be found in your node_modules 
-W20181017-03:31:47.741(0)? (STDERR) directory. Please run the following command to install it:
-W20181017-03:31:47.741(0)? (STDERR) 
-W20181017-03:31:47.741(0)? (STDERR)   meteor npm install --save @babel/runtime
-W20181017-03:31:47.742(0)? (STDERR) 
-W20181017-03:31:47.742(0)? (STDERR)     at babel-runtime.js (packages/babel-runtime.js:25:9)
-W20181017-03:31:47.742(0)? (STDERR)     at fileEvaluate (packages/modules-runtime.js:322:7)
-W20181017-03:31:47.743(0)? (STDERR)     at Module.require (packages/modules-runtime.js:224:14)
-W20181017-03:31:47.743(0)? (STDERR)     at require (packages/modules-runtime.js:244:21)
-W20181017-03:31:47.743(0)? (STDERR)     at packages/babel-runtime.js:85:15
-W20181017-03:31:47.744(0)? (STDERR)     at packages/babel-runtime.js:92:3
-W20181017-03:31:47.744(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:411:36
-W20181017-03:31:47.744(0)? (STDERR)     at Array.forEach (<anonymous>)
-W20181017-03:31:47.744(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:220:19
-W20181017-03:31:47.745(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:471:5
-=> Exited with code: 1
-W20181017-03:31:48.647(0)? (STDERR) /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:475
-W20181017-03:31:48.649(0)? (STDERR) }).run();
-W20181017-03:31:48.650(0)? (STDERR)    ^
-W20181017-03:31:48.650(0)? (STDERR) 
-W20181017-03:31:48.651(0)? (STDERR) Error: 
-W20181017-03:31:48.651(0)? (STDERR) The @babel/runtime npm package could not be found in your node_modules 
-W20181017-03:31:48.652(0)? (STDERR) directory. Please run the following command to install it:
-W20181017-03:31:48.653(0)? (STDERR) 
-W20181017-03:31:48.653(0)? (STDERR)   meteor npm install --save @babel/runtime
-W20181017-03:31:48.654(0)? (STDERR) 
-W20181017-03:31:48.654(0)? (STDERR)     at babel-runtime.js (packages/babel-runtime.js:25:9)
-W20181017-03:31:48.655(0)? (STDERR)     at fileEvaluate (packages/modules-runtime.js:322:7)
-W20181017-03:31:48.655(0)? (STDERR)     at Module.require (packages/modules-runtime.js:224:14)
-W20181017-03:31:48.665(0)? (STDERR)     at require (packages/modules-runtime.js:244:21)
-W20181017-03:31:48.666(0)? (STDERR)     at packages/babel-runtime.js:85:15
-W20181017-03:31:48.666(0)? (STDERR)     at packages/babel-runtime.js:92:3
-W20181017-03:31:48.667(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:411:36
-W20181017-03:31:48.667(0)? (STDERR)     at Array.forEach (<anonymous>)
-W20181017-03:31:48.668(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:220:19
-W20181017-03:31:48.668(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:471:5
-=> Exited with code: 1
-W20181017-03:31:49.622(0)? (STDERR) /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:475
-W20181017-03:31:49.622(0)? (STDERR) }).run();
-W20181017-03:31:49.623(0)? (STDERR)    ^
-W20181017-03:31:49.623(0)? (STDERR) 
-W20181017-03:31:49.623(0)? (STDERR) Error: 
-W20181017-03:31:49.624(0)? (STDERR) The @babel/runtime npm package could not be found in your node_modules 
-W20181017-03:31:49.624(0)? (STDERR) directory. Please run the following command to install it:
-W20181017-03:31:49.624(0)? (STDERR) 
-W20181017-03:31:49.625(0)? (STDERR)   meteor npm install --save @babel/runtime
-W20181017-03:31:49.625(0)? (STDERR) 
-W20181017-03:31:49.625(0)? (STDERR)     at babel-runtime.js (packages/babel-runtime.js:25:9)
-W20181017-03:31:49.625(0)? (STDERR)     at fileEvaluate (packages/modules-runtime.js:322:7)
-W20181017-03:31:49.626(0)? (STDERR)     at Module.require (packages/modules-runtime.js:224:14)
-W20181017-03:31:49.626(0)? (STDERR)     at require (packages/modules-runtime.js:244:21)
-W20181017-03:31:49.626(0)? (STDERR)     at packages/babel-runtime.js:85:15
-W20181017-03:31:49.627(0)? (STDERR)     at packages/babel-runtime.js:92:3
-W20181017-03:31:49.627(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:411:36
-W20181017-03:31:49.627(0)? (STDERR)     at Array.forEach (<anonymous>)
-W20181017-03:31:49.627(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:220:19
-W20181017-03:31:49.628(0)? (STDERR)     at /marguerite/ide/esp-travail/=jbl-projet-meteor/.meteor/local/build/programs/server/boot.js:471:5
-=> Exited with code: 1
-=> Your application is crashing. Waiting for file change.
-
-```
-
-
 # Utilisation (How to use)
 
-## Provision et Initialisation du cycle IAAC (Let's rock with you)
+## Provision Initiale et cycle IAAC (Let's rock with you)
+
+### Provision initiale
 
 Pour exécuter cette recette une première fois (How to execute this recipe for the first time) : 
 
@@ -167,6 +67,13 @@ _Soit, en une seule ligne (How to execute this recipe for the first time "all-in
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
 ```
+Lorsque la recette est terminée, l'application meteor générée est accessible via l'URL :
+```bash
+# COuld be an IP ADRESS, A DOMAIN NAME ...
+# export MARGUERITE_DOCKER_HOST_NETNAME=meteor-ide.marguerite.io
+export MARGUERITE_DOCKER_HOST_NETNAME=192.168.1.30
+http://$MARGUERITE_DOCKER_HOST_NETNAME:801/
+### Cycle IAAC
 
 _IAAC (After you have sucessfully executed this recipe for the first time, you may go back to initial state with) _ : 
 
