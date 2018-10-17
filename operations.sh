@@ -159,7 +159,7 @@ docker images
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read DEBUGJBL2
+# read DEBUGJBL2
 echo "  "
 echo "  "
 echo "  "
@@ -237,7 +237,8 @@ echo "  "
 docker images
 echo "  "
 echo "   Pressez la touche entrée pour terminer la provision. "
-echo "   Pressez enter key to proceed and watch Meteor container's logs. "
+echo " ---------------------------------------------------------------------- "
+echo "   Press enter key to proceed and watch Meteor container's logs. "
 echo " ---------------------------------------------------------------------- "
 echo "  "
 read ATTENTE_INTERACTIVE
