@@ -31,8 +31,10 @@ services:
         - NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR
         - NOM_DU_REPLICASET_MONGO=$NOM_DU_REPLICASET_MONGO
         - NVM_DIR=/root/nvm
-    volumes:
-      - $REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE:$IN_CONTAINER_WORKSPACE_IDE:rw
+# + / - => Les volumes me posent le problème suivant : ce n'est pas le user root qui agit dans le conteneur, et
+#          donc conflit de droits avec le SGF de l'hôte docker
+#     volumes:
+#       - $REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE:$IN_CONTAINER_WORKSPACE_IDE:rw
     environment:
       - WORKSPACE_IDE=$IN_CONTAINER_WORKSPACE_IDE
       - MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
