@@ -53,7 +53,18 @@ MARGUERITE_NPM_VERSION=6.4.1
 
 ### Provision initiale
 
-Pour exécuter cette recette une première fois (How to execute this recipe for the first time) : 
+* On the machine you installed Docker, the "_Docker Host_", add to your /etc/hosts, the following entries : 
+```bash
+# Infra Marguerite / Meteor
+# Marguerite's primary Docker Host Worker 
+192.168.1.30 dockhost1.marguerite.io marguerite.io
+# Marguerite's Meteor IDE Host 
+192.168.1.30 meteor-ide.marguerite.io marguerite.io
+```
+Only, replace `192.168.1.30` by the value of the IP Address of your "_Docker Host_".
+
+
+* exécuter cette recette une première fois (execute this recipe for the first time) : 
 
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite
