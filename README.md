@@ -1,9 +1,50 @@
+# Objet de ce repo (purpose)
 
-# Utilisation
+This repo brings you a provisioning recipe, for a container embedding a [Meteor Framework]() runtime.
+It has been tested on a CentOS 7 system, with Docker and Docker compose installed on them.
+You may install Docker and Docker compose with [one](https://github.com/Jean-Baptiste-Lasselle/provision-hote-docker-sur-centos)  of my personal recipes, on a bare CentOS 7 minimal installation.
+If you snapshot/restore Virtual Machines all over, you might also have problems travelling back to the future, in which case I may let you use [my doloreane](https://github.com/Jean-Baptiste-Lasselle/mise-a-l-heure).
+
+The very point of that recipe, is that is has parameters, which allow you to change, at runtime : 
+| Variable | What it changes | Example value | 
+| - | - | - |
+| `NOM_PROJET_MARGUERITE_METEOR` | The meteor project name, like when you `meteor create my-super-project-say-rocketchat` | `bernard-projet-meteor` |
+| `IN_CONTAINER_WORKSPACE_IDE` | The directory, in the container, in which the Meteor project will be created.  | `/marguerite/ide/workspace` |
+| `REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE` | The directory, on the docker host, to which `$IN_CONTAINER_WORKSPACE_IDE` will be mapped.  | `/marguerite/ide/workspace` |
+| `MARGUERITE_METEOR_PORT` | The port number, inside the docker container, that the meteor app will use on the server side.  | `2000` |
+| `MARGUERITE_METEOR_NODE_OPTIONS` | The value you give to that variable, will be the exact value set for the `NODE_OPTIONS` environement variable, in use at runtime by the **Meteor Framework**.  | `--debug` |
+| `MARGUERITE_METEOR_VERSION` | Sets and forces to set, the **Meteor Framework**'s version. Has to be semver, prefixes will be infered by provisioning automation.  | `1.8.0` |
+| `MARGUERITE_NVM_VERSION` | Sets and forces to set, **NVM**'s version. Has to be semver, prefixes will be infered by provisioning automation. | `0.33.10` |
+| `MARGUERITE_NODEJS_VERSION` | Sets and forces to set, the **NodeJS**' version. Has to be semver, prefixes will be infered by provisioning automation. | `8.12.0` |
+| `MARGUERITE_NPM_VERSION` | Sets and forces to set, the **NPM**'s version. Has to be semver, prefixes will be infered by provisioning automation.  | `6.4.1` |
+
+
+> `./.env`
+```yaml
+NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
+# WORKSPACE_IDE=/marguerite/ide/esp-travail/
+IN_CONTAINER_WORKSPACE_IDE=/marguerite/ide/esp-travail/
+REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE=./marguerite/ide/workspace
+
+MARGUERITE_METEOR_PORT=6000
+MARGUERITE_METEOR_NODE_OPTIONS=""
+# Faire en sorte que la version de meteor soit effectivement forcée par cette variable d'environnement
+MARGUERITE_METEOR_VERSION=1.8.0
+# Faire en sorte que la version de NVM soit effectivement forcée par cette variable d'environnement
+MARGUERITE_NVM_VERSION=0.33.10
+# Faire en sorte que la version de NODEJS soit effectivement forcée par cette variable d'environnement
+# j'ai vu des préfixes de la forme "v8.12.0", dans la sortie std du build
+MARGUERITE_NODEJS_VERSION=8.12.0
+# OPTIONNEL: Faire en sorte que la version de NPM soit effectivement forcée par cette variable d'environnement
+MARGUERITE_NPM_VERSION=6.4.1
+```
+
+
+# Utilisation (How to use)
 
 ## Provision et Initialisation du cycle IAAC
 
-Pour exécuter cette recette une première fois : 
+Pour exécuter cette recette une première fois (How to execute this recipe for the first time) : 
 
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite
@@ -13,18 +54,18 @@ git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" .
 chmod +x ./operations.sh
 ./operations.sh
 ```
-_Soit, en une seule ligne_ : 
+_Soit, en une seule ligne (How to execute this recipe for the first time "all-in-one-line")_ : 
 
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
 ```
 
-_IAAC_ : 
+_IAAC (After you have sucessfully executed this recipe for the first time, you may go back to initial state with) _ : 
 
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite && cd $PROVISIONING_HOME && docker-compose down --rmi all && cd $HOME && sudo rm -rf  $PROVISIONING_HOME && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
 ```
-_Pre-IAAC_ :
+_Pre-IAAC (And in case execution never sucessfully reached a first execution of 'docker-compose up' ...) _ :
 
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite && cd $HOME && sudo rm -rf $PROVISIONING_HOME && sudo docker system prune -f &&  && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
