@@ -65,7 +65,7 @@ Only, replace `192.168.1.30` by the value of the IP Address of your "_Docker Hos
 
 Which will allow you to access your Meteor IDE using a neat domaine name network host name : 
 
-![The brand new Fully fledged Meteor App accessed with domain name](CCCC)
+![The brand new Fully fledged Meteor App accessed with domain name](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/documentation/images/the-brand-new-meteor-app-2.png)
 
 * exécuter cette recette une première fois (execute this recipe for the first time) : 
 
@@ -105,7 +105,7 @@ firefox http://$MARGUERITE_HOTE_RESEAU_IDE:$NUM_PORT_ECOUTE_REVERSE_PROXY/
 
 You then wiull see this : 
 
-![The brand new Fully fledged Meteor App](CCCC)
+![The brand new Fully fledged Meteor App](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/documentation/images/the-brand-new-meteor-app.png)
 
 ### Cycle IAAC
 
