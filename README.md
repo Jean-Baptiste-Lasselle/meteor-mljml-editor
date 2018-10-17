@@ -12,7 +12,7 @@ The very point of that recipe, is that is has parameters, which allow you to cha
 | -------- | --------------- | ------------- |
 | `NOM_PROJET_MARGUERITE_METEOR` | The meteor project name, like when you `meteor create my-super-project-say-rocketchat` | `bernard-projet-meteor` |
 | `IN_CONTAINER_WORKSPACE_IDE` | The directory, in the container, in which the Meteor project will be created.  | `/marguerite/ide/workspace` |
-| `REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE` | The directory, on the docker host, to which `$IN_CONTAINER_WORKSPACE_IDE` will be mapped.  | `/marguerite/ide/workspace` |
+| `REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE` | The directory, on the docker host, to which `$IN_CONTAINER_WORKSPACE_IDE` will be mapped.  | `./marguerite/ide/workspace` |
 | `MARGUERITE_METEOR_PORT` | The port number, inside the docker container, that the meteor app will use on the server side.  | `2000` |
 | `MARGUERITE_METEOR_NODE_OPTIONS` | The value you give to that variable, will be the exact value set for the `NODE_OPTIONS` environement variable, in use at runtime by the **Meteor Framework**.  | `--debug` |
 | `MARGUERITE_METEOR_VERSION` | Sets and forces to set, the **Meteor Framework**'s version. Has to be semver, prefixes will be infered by provisioning automation.  | `1.8.0` |
