@@ -89,7 +89,7 @@ services:
   nginx:
     image: nginx
 #     hostname: "proxy"
-    container_name: "reverseproxy"
+    container_name: "marguerite_reverseproxy"
     restart: always
     volumes:
       - ./nginx/conf.d/:/etc/nginx/conf.d/:rw
