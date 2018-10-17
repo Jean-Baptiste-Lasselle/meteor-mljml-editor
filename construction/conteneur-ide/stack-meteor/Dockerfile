@@ -127,11 +127,13 @@ RUN ls -all $WORKSPACE_IDE
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
 ADD point-d-entree.sh $WORKSPACE_IDE
 RUN chmod a+x $WORKSPACE_IDE/point-d-entree.sh
+RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE
+RUN chown $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE/point-d-entree.sh
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo " METEOR - STACK ==>> VERIF APRES INSTALLATION POINT ENTREE DOCKER WORKSPACE_IDE : "
 RUN ls -all $WORKSPACE_IDE
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-# RUN exit 2
+RUN exit 2
 RUN echo "# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
