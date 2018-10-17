@@ -63,6 +63,9 @@ MARGUERITE_NPM_VERSION=6.4.1
 ```
 Only, replace `192.168.1.30` by the value of the IP Address of your "_Docker Host_".
 
+Which will allow you to access your Meteor IDE using a neat domaine name network host name : 
+
+![The brand new Fully fledged Meteor App accessed with domain name](CCCC)
 
 * exécuter cette recette une première fois (execute this recipe for the first time) : 
 
