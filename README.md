@@ -1,8 +1,10 @@
 # Objet de ce repo (purpose)
 
-This repo brings you a provisioning recipe, for a container embedding a [Meteor Framework]() runtime.
-It has been tested on a CentOS 7 system, with Docker and Docker compose installed on them.
+This repo brings you a provisioning recipe, for a container embedding a [Meteor Framework](https://www.meteor.com/) runtime.
+It has been tested on a CentOS 7 system, with Docker and Docker compose installed on it.
+
 You may install Docker and Docker compose with [one](https://github.com/Jean-Baptiste-Lasselle/provision-hote-docker-sur-centos)  of my personal recipes, on a bare CentOS 7 minimal installation.
+
 If you snapshot/restore Virtual Machines all over, you might also have problems travelling back to the future, in which case I may let you use [my doloreane](https://github.com/Jean-Baptiste-Lasselle/mise-a-l-heure).
 
 The very point of that recipe, is that is has parameters, which allow you to change (`./.env`), at runtime : 
@@ -81,7 +83,7 @@ Removing intermediate container 84255389b136
 ```
 # Utilisation (How to use)
 
-## Provision et Initialisation du cycle IAAC
+## Provision et Initialisation du cycle IAAC (Let's rock with you)
 
 Pour exécuter cette recette une première fois (How to execute this recipe for the first time) : 
 
