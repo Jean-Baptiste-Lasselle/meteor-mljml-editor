@@ -47,13 +47,14 @@ RUN echo " VERIF WORKSPACE_IDE=$WORKSPACE_IDE"
 RUN echo " VERIF NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR"
 RUN echo " VERIF REP HEALTHCHECK=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/"
 RUN echo " ----------------------------------- "
-RUN echo " contenu du répertoire WORKSPACE_IDE, s'il existe  : "
+RUN echo " METEOR - IDE ==>> contenu du répertoire WORKSPACE_IDE, s'il existe  : "
 RUN ls -all $WORKSPACE_IDE
 RUN echo " ----------------------------------- "
-RUN echo " contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
+RUN echo " METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
 RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
 RUN echo " ----------------------------------- "
-# RUN exit 2
+RUN exit 2
+
 
 USER $MARGUERITE_USER_NAME
 HEALTHCHECK --interval=1s --timeout=30s --retries=150 CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
