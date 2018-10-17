@@ -162,7 +162,7 @@ docker images
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-# read DEBUGJBL2
+read DEBUGJBL2
 echo "  "
 echo "  "
 echo "  "
