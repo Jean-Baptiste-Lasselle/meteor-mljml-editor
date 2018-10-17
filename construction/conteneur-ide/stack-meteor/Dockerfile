@@ -149,7 +149,7 @@ RUN while read iterateur; do   iterateur=${iterateur#"v"} ; echo "$iterateur" >>
 # À ce stade, on a généré un fichier qui contient la liste de toutes les versions de NVM, en syntaxe semver.
 # On va donc maintenant trier cette liste, pour en retirer la dernière et l'avant dernière entrée : 
 RUN export DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 1 | head -n 1) && echo "La dernière version de NVM est : [$DERNIRE_VERSION_NVM] "
-RUN export AVANT_DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 2 | head -n 1) && echo "La dernière version de NVM est : [$AVANT_DERNIRE_VERSION_NVM] "
+RUN export AVANT_DERNIRE_VERSION_NVM=$(sort --version-sort ./liste-versions-NVM-a-trier-$HORODATAGE_OPS.kytes | tail -n 2 | head -n 1) && echo "L'avant dernière version de NVM est : [$AVANT_DERNIRE_VERSION_NVM] "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo "Les 5 dernières dernières versions de NVM sont : "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
