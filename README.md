@@ -44,27 +44,40 @@ MARGUERITE_NPM_VERSION=6.4.1
 # lnl
 
 ```bash
-Step 20/26 : RUN echo " METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
- ---> Running in 34c5b4724181
- METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : 
-Removing intermediate container 34c5b4724181
- ---> f6ff75ec951c
-Step 21/26 : RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
- ---> Running in 66f5d81814e4
+Step 17/26 : RUN echo " METEOR - IDE ==>> contenu du répertoire WORKSPACE_IDE, s'il existe  : "
+ ---> Running in 688ccecb0759
+ METEOR - IDE ==>> contenu du répertoire WORKSPACE_IDE, s'il existe  : 
+Removing intermediate container 688ccecb0759
+ ---> e37fad7820cc
+Step 18/26 : RUN ls -all $WORKSPACE_IDE
+ ---> Running in 1b06627dadc3
 total 4
-drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 01:45 .
-drwxr-xr-x. 1 jbl-devops wheel  88 Oct 17 01:45 ..
--rwxrwxr-x. 1 jbl-devops wheel 590 Oct 17 01:40 marguerite-healthcheck.sh
-Removing intermediate container 66f5d81814e4
- ---> f247d60f8f8c
-Step 22/26 : RUN echo " ----------------------------------- "
- ---> Running in 6e5f8be245b6
+drwxr-xr-x. 1 jbl-devops wheel  88 Oct 17 02:00 .
+drwxr-xr-x. 1 jbl-devops wheel  25 Oct 17 01:56 ..
+drwxr-xr-x. 1 jbl-devops wheel 145 Oct 17 01:59 jbl-devops-projet-meteor
+drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 02:00 jbl-projet-meteor
+-rwxrwxr-x. 1 jbl-devops wheel 687 Oct 17 01:55 point-d-entree.sh
+Removing intermediate container 1b06627dadc3
+ ---> 06c5353c9df5
+Step 19/26 : RUN echo " ----------------------------------- "
+ ---> Running in 866274a2f420
  ----------------------------------- 
-Removing intermediate container 6e5f8be245b6
- ---> 63e8fa32f63b
-Step 23/26 : RUN exit 2
- ---> Running in 3006a1d01b89
-ERROR: Service 'ide_meteor' failed to build: The command '/bin/sh -c exit 2' returned a non-zero code: 2
+Removing intermediate container 866274a2f420
+ ---> 04766f28733e
+Step 20/26 : RUN echo " METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
+ ---> Running in b85534754d99
+ METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : 
+Removing intermediate container b85534754d99
+ ---> 63ea17de1710
+Step 21/26 : RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
+ ---> Running in 84255389b136
+total 4
+drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 02:00 .
+drwxr-xr-x. 1 jbl-devops wheel  88 Oct 17 02:00 ..
+-rwxrwxr-x. 1 jbl-devops wheel 590 Oct 17 01:55 marguerite-healthcheck.sh
+Removing intermediate container 84255389b136
+ ---> 0fc25a76b7dc
+
 ```
 # Utilisation (How to use)
 
