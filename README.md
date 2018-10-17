@@ -5,9 +5,11 @@ It has been tested on a CentOS 7 system, with Docker and Docker compose installe
 You may install Docker and Docker compose with [one](https://github.com/Jean-Baptiste-Lasselle/provision-hote-docker-sur-centos)  of my personal recipes, on a bare CentOS 7 minimal installation.
 If you snapshot/restore Virtual Machines all over, you might also have problems travelling back to the future, in which case I may let you use [my doloreane](https://github.com/Jean-Baptiste-Lasselle/mise-a-l-heure).
 
-The very point of that recipe, is that is has parameters, which allow you to change, at runtime : 
+The very point of that recipe, is that is has parameters, which allow you to change (`./.env`), at runtime : 
+
+| -------- | --------------- | ------------- |
 | Variable | What it changes | Example value | 
-| - | - | - |
+| -------- | --------------- | ------------- |
 | `NOM_PROJET_MARGUERITE_METEOR` | The meteor project name, like when you `meteor create my-super-project-say-rocketchat` | `bernard-projet-meteor` |
 | `IN_CONTAINER_WORKSPACE_IDE` | The directory, in the container, in which the Meteor project will be created.  | `/marguerite/ide/workspace` |
 | `REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE` | The directory, on the docker host, to which `$IN_CONTAINER_WORKSPACE_IDE` will be mapped.  | `/marguerite/ide/workspace` |
