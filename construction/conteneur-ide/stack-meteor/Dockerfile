@@ -16,7 +16,7 @@ ENV AVANT_DERNIRE_VERSION_NVM=$AVANT_DERNIRE_VERSION_NVM
 ARG VERSION_NODEJS=1.0.0
 ENV VERSION_NODEJS=$VERSION_NODEJS
 
-ARG MARGUERITE_METEOR_VERSION=1.0.0
+ARG MARGUERITE_METEOR_VERSION=1.8.0
 ENV MARGUERITE_METEOR_VERSION=$MARGUERITE_METEOR_VERSION
 
 
@@ -30,10 +30,10 @@ ARG MARGUERITE_USER_PWD=marguerite
 ENV MARGUERITE_USER_PWD=$MARGUERITE_USER_PWD
 
 # ARG WORKSPACE_IDE=/home/$MARGUERITE_USER_NAME/marguerite/ide/esp-travail/connerie
-ARG WORKSPACE_IDE=/marguerite/ide/esp-travail/connerie
+ARG WORKSPACE_IDE=$WORKSPACE_IDE
 ENV WORKSPACE_IDE=$WORKSPACE_IDE
 
-ARG NOM_PROJET_MARGUERITE_METEOR=default-meteor-project-name
+ARG NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR
 ENV NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR
 
 
@@ -45,20 +45,47 @@ ENV NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR
 # > For example: meteor run --port 4000 will run the development server on http://localhost:4000 and the development MongoDB instance on mongodb://localhost:4001.
 # > Run meteor help run to see the full list of options.
 
-ARG MARGUERITE_METEOR_PORT=4000
+ARG MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
 ENV MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT
 
 # NODE_OPTIONS='--debug --debug-brk'
 # ARG MARGUERITE_METEOR_NODE_OPTIONS='--debug --debug-brk'
 ARG MARGUERITE_METEOR_NODE_OPTIONS=""
 ENV MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
-# Ainsi la variable d'envrionnement existera àau lancement du cotneneur, et définira la valeur de NODE_OPTIONS, à l'exécution meteor run
+
+# Ainsi la variable d'envrionnement existera au build de l'image du cotneneur, et définira la valeur de NODE_OPTIONS, à l'exécution meteor run
+ARG NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+# Ainsi la variable d'envrionnement existera au lancement du cotneneur, et définira la valeur de NODE_OPTIONS, à l'exécution meteor run
 ENV NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS
+
+
+# Faire en sorte que la version de NVM soit effectivement forcée par cette variable d'environnement
+ARG MARGUERITE_NVM_VERSION=$MARGUERITE_NVM_VERSION
+ENV MARGUERITE_NVM_VERSION=$MARGUERITE_NVM_VERSION
+
+# Faire en sorte que la version de NODEJS soit effectivement forcée par cette variable d'environnement
+# j'ai vu des préfixes de la forme "v8.12.0", dans la sortie std du build
+ARG MARGUERITE_NODEJS_VERSION=$MARGUERITE_NODEJS_VERSION
+# =8.12.0
+ENV MARGUERITE_NODEJS_VERSION=$MARGUERITE_NODEJS_VERSION
+
+# OPTIONNEL: Faire en sorte que la version de NPM soit effectivement forcée par cette variable d'environnement
+ARG MARGUERITE_NPM_VERSION=$MARGUERITE_NPM_VERSION
+# =6.4.1
+ENV MARGUERITE_NPM_VERSION=$MARGUERITE_NPM_VERSION
+
+
+
+
 
 # ---- MARGUERITE MONGO CONF ---- # 
 # cf. dans le fichier ["./.env"], la valeur de la variable [NOM_DU_REPLICASET_MONGO]
 ARG NOM_DU_REPLICASET_MONGO=val_defaut_dans_conteneur_rs0
 ENV NOM_DU_REPLICASET_MONGO=$NOM_DU_REPLICASET_MONGO
+
+
+
+
 
 # ---- OPS ---- #
 USER root
