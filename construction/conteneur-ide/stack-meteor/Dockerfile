@@ -16,8 +16,8 @@ ENV AVANT_DERNIRE_VERSION_NVM=$AVANT_DERNIRE_VERSION_NVM
 ARG VERSION_NODEJS=1.0.0
 ENV VERSION_NODEJS=$VERSION_NODEJS
 
-ARG VERSION_METEOR_FRAMEWORK=1.0.0
-ENV VERSION_METEOR_FRAMEWORK=$VERSION_METEOR_FRAMEWORK
+ARG MARGUERITE_METEOR_VERSION=1.0.0
+ENV MARGUERITE_METEOR_VERSION=$MARGUERITE_METEOR_VERSION
 
 
 # --- MARGUERITE --- #
@@ -277,7 +277,8 @@ RUN ls -all /home/jbl-devops
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
+# RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
+RUN echo "# + Installation du Meteor Framework, version [$MARGUERITE_METEOR_VERSION] + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # curl https://install.meteor.com/ | sh
@@ -311,7 +312,15 @@ RUN echo " NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR "
 RUN echo "  "
 RUN echo " MARGUERITE_METEOR_PORT=$MARGUERITE_METEOR_PORT "
 RUN echo "  "
+RUN echo " MARGUERITE_METEOR_VERSION=$MARGUERITE_METEOR_VERSION "
+RUN echo "  "
 RUN echo " MARGUERITE_METEOR_NODE_OPTIONS=$MARGUERITE_METEOR_NODE_OPTIONS "
+RUN echo "  "
+RUN echo " MARGUERITE_NVM_VERSION=$MARGUERITE_NVM_VERSION "
+RUN echo "  "
+RUN echo " MARGUERITE_NODEJS_VERSION=$MARGUERITE_NODEJS_VERSION "
+RUN echo "  "
+RUN echo " MARGUERITE_NPM_VERSION=$MARGUERITE_NPM_VERSION "
 RUN echo "  "
 RUN echo " \$WORKSPACE_IDE/\$NOM_PROJET_MARGUERITE_METEOR=$WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR "
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
