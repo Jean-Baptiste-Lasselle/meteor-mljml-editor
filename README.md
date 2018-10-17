@@ -1,8 +1,3 @@
-# À faire no.1
-
-Lier le workspace du projet meteor, à un repo Git définit par une varible d'environnement "`METEOR_APP_GIT_REPO`", et : 
-* Si le repo n'existe pas, il est créé avec le build de l'image
-* S'il existe, et dans tous les cas, on fait un  git clone de la dernière version du repo git , au niveau du `ENTRYPOINT`, donc dans le fichier `./construction/conteneur-ide/stack-meteor/point-d-entree.sh`. Et on fait ce git clone, avant les commandes meteor.
 
 
 # Objet de ce repo (purpose)
