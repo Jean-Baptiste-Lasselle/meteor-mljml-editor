@@ -72,7 +72,10 @@ Lorsque la recette est terminée, l'application meteor générée est accessible
 # COuld be an IP ADRESS, A DOMAIN NAME ...
 # export MARGUERITE_DOCKER_HOST_NETNAME=meteor-ide.marguerite.io
 export MARGUERITE_DOCKER_HOST_NETNAME=192.168.1.30
-http://$MARGUERITE_DOCKER_HOST_NETNAME:801/
+export NUM_PORT_ECOUTE_REVERSE_PROXY=801
+firefox http://$MARGUERITE_DOCKER_HOST_NETNAME:$NUM_PORT_ECOUTE_REVERSE_PROXY/
+```
+
 ### Cycle IAAC
 
 _IAAC (After you have sucessfully executed this recipe for the first time, you may go back to initial state with) _ : 
