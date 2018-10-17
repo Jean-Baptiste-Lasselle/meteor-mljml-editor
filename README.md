@@ -67,14 +67,27 @@ _Soit, en une seule ligne (How to execute this recipe for the first time "all-in
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
 ```
+### Accessing the new Meteor App
+
 Lorsque la recette est terminée, l'application meteor générée est accessible via l'URL :
+When execution reached end successfully, you may access your brand new Meteor App at :
+
+http://$MARGUERITE_HOTE_RESEAU_IDE:$NUM_PORT_ECOUTE_REVERSE_PROXY/
+
+Où les variables [MARGUERITE_HOTE_RESEAU_IDE] et [NUM_PORT_ECOUTE_REVERSE_PROXY] dont ppur valeur celle attribuées aux variables correspondantes dans le fichier [./.env]
+
+Where Variables [MARGUERITE_HOTE_RESEAU_IDE] and [NUM_PORT_ECOUTE_REVERSE_PROXY] have the accurate same values as those used to declare respective variables in [./.env] conf. file.
+
+
 ```bash
-# COuld be an IP ADRESS, A DOMAIN NAME ...
-# export MARGUERITE_DOCKER_HOST_NETNAME=meteor-ide.marguerite.io
-export MARGUERITE_DOCKER_HOST_NETNAME=192.168.1.30
+# Could be an IP ADRESS, A DOMAIN NAME ...
+export MARGUERITE_HOTE_RESEAU_IDE=meteor-ide.marguerite.io
+# export MARGUERITE_DOCKER_HOST_NETNAME=dockerhost1.marguerite.io
+# export MARGUERITE_DOCKER_HOST_NETNAME=192.168.1.30
 export NUM_PORT_ECOUTE_REVERSE_PROXY=801
-firefox http://$MARGUERITE_DOCKER_HOST_NETNAME:$NUM_PORT_ECOUTE_REVERSE_PROXY/
+firefox http://$MARGUERITE_HOTE_RESEAU_IDE:$NUM_PORT_ECOUTE_REVERSE_PROXY/
 ```
+
 
 ### Cycle IAAC
 
