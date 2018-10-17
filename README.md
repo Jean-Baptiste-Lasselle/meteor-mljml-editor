@@ -47,42 +47,54 @@ MARGUERITE_NPM_VERSION=6.4.1
 
 # lnl
 
-```bash
-Step 17/26 : RUN echo " METEOR - IDE ==>> contenu du répertoire WORKSPACE_IDE, s'il existe  : "
- ---> Running in 688ccecb0759
- METEOR - IDE ==>> contenu du répertoire WORKSPACE_IDE, s'il existe  : 
-Removing intermediate container 688ccecb0759
- ---> e37fad7820cc
-Step 18/26 : RUN ls -all $WORKSPACE_IDE
- ---> Running in 1b06627dadc3
-total 4
-drwxr-xr-x. 1 jbl-devops wheel  88 Oct 17 02:00 .
-drwxr-xr-x. 1 jbl-devops wheel  25 Oct 17 01:56 ..
-drwxr-xr-x. 1 jbl-devops wheel 145 Oct 17 01:59 jbl-devops-projet-meteor
-drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 02:00 jbl-projet-meteor
--rwxrwxr-x. 1 jbl-devops wheel 687 Oct 17 01:55 point-d-entree.sh
-Removing intermediate container 1b06627dadc3
- ---> 06c5353c9df5
-Step 19/26 : RUN echo " ----------------------------------- "
- ---> Running in 866274a2f420
- ----------------------------------- 
-Removing intermediate container 866274a2f420
- ---> 04766f28733e
-Step 20/26 : RUN echo " METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
- ---> Running in b85534754d99
- METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : 
-Removing intermediate container b85534754d99
- ---> 63ea17de1710
-Step 21/26 : RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
- ---> Running in 84255389b136
-total 4
-drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 02:00 .
-drwxr-xr-x. 1 jbl-devops wheel  88 Oct 17 02:00 ..
--rwxrwxr-x. 1 jbl-devops wheel 590 Oct 17 01:55 marguerite-healthcheck.sh
-Removing intermediate container 84255389b136
- ---> 0fc25a76b7dc
+Dans la version courante, j'ai un problème avec le démarrage de mon conteneur ide avec docker-compose, mais par contre, le test suivant montre que j'ai bien réussit à me construire un cotnen,eur avec un runtime Meteor, unprojet meteor tout prêt : 
 
+```bash
+[jibl@pc-100 marguerite]$ docker run -itd --name conteneur-de-test --entrypoint "/marguerite/ide/esp-travail/point-d-entree.sh" marguerite/meteor-ide:1.0.0
+04a93b15ac857cf42d014559ffe83c4d4f33b7dca465b47198c567e2162276cb
+[jibl@pc-100 marguerite]$ docker ps -a
+CONTAINER ID        IMAGE                                 COMMAND                  CREATED              STATUS                                 PORTS                                                                          NAMES
+04a93b15ac85        marguerite/meteor-ide:1.0.0           "/marguerite/ide/esp…"   3 seconds ago        Up 2 seconds (health: starting)        4000/tcp                                                                       voyons4
+b311e68879a7        marguerite/meteor-ide:1.0.0           "bash"                   About a minute ago   Up About a minute (health: starting)   4000/tcp                                                                       voyons3
+147776cf61c6        marguerite/meteor-ide:1.0.0           "null"                   About a minute ago   Created                                4000/tcp                                                                       voyons2
+d84197a7691f        marguerite/meteor-ide:1.0.0           "/bin/sh -c $WORKSPA…"   4 minutes ago        Exited (1) 4 minutes ago                                                                                              voyons
+e5fd4f93d7bd        nginx                                 "nginx -g 'daemon of…"   8 minutes ago        Up 8 minutes                           80/tcp, 0.0.0.0:1222->322/tcp, 0.0.0.0:1443->7443/tcp, 0.0.0.0:801->8030/tcp   marguerite_reverseproxy
+e4b556508f8e        marguerite/meteor-ide:1.0.0           "/bin/sh -c $WORKSPA…"   8 minutes ago        Restarting (127) About a minute ago                                                                                   ide_meteor_marguerite
+d625d4ffb8e9        marguerite/mongo:1.0.0                "docker-entrypoint.s…"   8 minutes ago        Up 8 minutes (health: starting)        0.0.0.0:27018->27017/tcp                                                       ide_mongo_marguerite
+d93343956097        marguerite/sonde-reseau:0.0.1         "/bin/bash"              8 minutes ago        Up 8 minutes                                                                                                          marelle
+
+[jibl@pc-100 marguerite]$ docker logs -f conteneur-de-test 
+ -------------------------------------------------------------- 
+ VERIFICATIONS POINT D'ENTREE : 
+ -------------------------------------------------------------- 
+  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jbl-devops/.meteor  
+  NODE_OPTIONS=  
+  NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor  
+  Environnement METEOR : 
+NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
+CHEMIN_PROJET_MARGUERITE_METEOR=/marguerite/ide/esp-travail/default-meteor-project-name
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/jbl-devops/.meteor
+ -------------------------------------------------------------- 
+/marguerite/ide/esp-travail
+total 4
+drwxr-xr-x. 1 jbl-devops wheel  91 Oct 17 02:40 .
+drwxr-xr-x. 1 jbl-devops wheel  25 Oct 17 02:32 ..
+drwxr-xr-x. 1 jbl-devops wheel 145 Oct 17 02:36 default-meteor-project-name
+drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 02:40 jbl-projet-meteor
+-rwxrwxr-x. 1 jbl-devops wheel 687 Oct 17 02:31 point-d-entree.sh
+ -------------------------------------------------------------- 
+run: You're not in a Meteor project directory.
+
+To create a new Meteor project:
+  meteor create <project name>
+For example:
+  meteor create myapp
+
+For more help, see 'meteor --help'.
+[jibl@pc-100 marguerite]$ 
 ```
+
+
 # Utilisation (How to use)
 
 ## Provision et Initialisation du cycle IAAC (Let's rock with you)
