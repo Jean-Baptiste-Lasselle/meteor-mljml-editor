@@ -85,11 +85,8 @@ export VERSION_IMAGE_MARGUERITE_IDE_METEOR=$(cat ./.env|grep VERSION_IMAGE_MARGU
 export WORKSPACE_IDE=$(cat ./.env|grep IN_CONTAINER_WORKSPACE_IDE | awk -F = '{print $2}')
 export NOM_PROJET_MARGUERITE_METEOR=$(cat ./.env|grep NOM_PROJET_MARGUERITE_METEOR | awk -F = '{print $2}')
 
-export MARGUERITE_METEOR_VERSION=$(cat ./.env|grep NOM_PROJET_MARGUERITE_METEOR | awk -F = '{print $2}')
-export MARGUERITE_METEOR_NODE_OPTIONS=$(cat ./.env|grep NOM_PROJET_MARGUERITE_METEOR | awk -F = '{print $2}')
-# export VERSION_METEOR_FRAMEWORK=$(cat ./.env|grep VERSION_METEOR_FRAMEWORK | awk -F = '{print $2}')
-export MARGUERITE_NVM_VERSION=$(cat ./.env|grep MARGUERITE_NVM_VERSION | awk -F = '{print $2}')
-export MARGUERITE_METEOR_NODE_OPTIONS=$(cat ./.env|grep NOM_PROJET_MARGUERITE_METEOR | awk -F = '{print $2}')
+export MARGUERITE_METEOR_VERSION=$(cat ./.env|grep MARGUERITE_METEOR_VERSION | awk -F = '{print $2}')
+export MARGUERITE_METEOR_NODE_OPTIONS=$(cat ./.env|grep MARGUERITE_METEOR_NODE_OPTIONS | awk -F = '{print $2}')
 export MARGUERITE_NVM_VERSION=$(cat ./.env|grep MARGUERITE_NVM_VERSION | awk -F = '{print $2}')
 export MARGUERITE_NODEJS_VERSION=$(cat ./.env|grep MARGUERITE_NODEJS_VERSION | awk -F = '{print $2}')
 export MARGUERITE_NPM_VERSION=$(cat ./.env|grep MARGUERITE_NPM_VERSION | awk -F = '{print $2}')
