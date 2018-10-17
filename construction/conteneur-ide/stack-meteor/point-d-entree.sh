@@ -13,6 +13,10 @@ echo "  NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR  "
 echo "  Environnement METEOR : "
 env |grep meteor
 echo " -------------------------------------------------------------- "
+pwd
+ls -all
+echo " -------------------------------------------------------------- "
+
 
 cd $NOM_PROJET_MARGUERITE_METEOR
 meteor run --port $MARGUERITE_METEOR_PORT
