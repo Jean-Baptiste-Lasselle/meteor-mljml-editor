@@ -103,9 +103,23 @@ export NUM_PORT_ECOUTE_REVERSE_PROXY=801
 firefox http://$MARGUERITE_HOTE_RESEAU_IDE:$NUM_PORT_ECOUTE_REVERSE_PROXY/
 ```
 
-You then wiull see this : 
+* You then will get something looking like this : 
 
 ![The brand new Fully fledged Meteor App](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/documentation/images/the-brand-new-meteor-app.png)
+
+
+* On the machine you want to access the Meteor App from, using a browser, add to your `/etc/hosts`, the following new lines : 
+```bash
+# Infra Marguerite / Meteor
+# Marguerite's primary Docker Host Worker 
+192.168.1.30 dockhost1.marguerite.io marguerite.io
+# Marguerite's Meteor IDE Host 
+192.168.1.30 meteor-ide.marguerite.io marguerite.io
+```
+Above, replace `192.168.1.30` by the value of the IP Address of your "_Docker Host_". You then will get something like this : 
+
+![The brand new Fully fledged Meteor App](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/documentation/images/the-brand-new-meteor-app-2.png)
+
 
 ### Cycle IAAC
 
