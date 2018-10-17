@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -eo pipefail
 
 export NOM_HOTE_RESEAU="$(hostname --ip-address || echo '127.0.0.1')"
