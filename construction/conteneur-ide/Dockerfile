@@ -59,5 +59,5 @@ RUN echo " ----------------------------------- "
 
 USER $MARGUERITE_USER_NAME
 HEALTHCHECK --interval=1s --timeout=30s --retries=150 CMD $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
-# ENTRYPOINT $WORKSPACE_IDE/point-d-entree.sh
-CMD ["/bin/bash"]
+ENTRYPOINT $WORKSPACE_IDE/point-d-entree.sh
+CMD ["/bin/sh"]
