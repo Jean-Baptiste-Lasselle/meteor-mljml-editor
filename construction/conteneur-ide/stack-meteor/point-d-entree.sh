@@ -16,5 +16,6 @@ echo " -------------------------------------------------------------- "
 pwd
 ls -all
 echo " -------------------------------------------------------------- "
-
+meteor npm install --save @babel/runtime
+meteor npm update 
 meteor run --port $MARGUERITE_METEOR_PORT
