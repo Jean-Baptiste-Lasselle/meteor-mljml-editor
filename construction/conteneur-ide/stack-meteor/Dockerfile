@@ -131,7 +131,7 @@ RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo " METEOR - STACK ==>> VERIF APRES INSTALLATION POINT ENTREE DOCKER WORKSPACE_IDE : "
 RUN ls -all $WORKSPACE_IDE
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN exit 2
+# RUN exit 2
 RUN echo "# + Installation de NodeJS / NVM, pour gérer les versions NodeJS + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
