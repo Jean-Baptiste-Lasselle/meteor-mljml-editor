@@ -2,7 +2,7 @@
 
 export NODE_OPTIONS=$MARGUERITE_NODE_OPTIONS
 export PATH=$PATH:$HOME/.meteor
-
+cd $NOM_PROJET_MARGUERITE_METEOR
 
 echo " -------------------------------------------------------------- "
 echo " VERIFICATIONS POINT D'ENTREE : "
@@ -17,6 +17,4 @@ pwd
 ls -all
 echo " -------------------------------------------------------------- "
 
-
-cd $NOM_PROJET_MARGUERITE_METEOR
 meteor run --port $MARGUERITE_METEOR_PORT
