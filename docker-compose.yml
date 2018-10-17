@@ -51,7 +51,7 @@ services:
     ports:
       - $MARGUERITE_METEOR_PORT:$MARGUERITE_METEOR_PORT
     expose:
-      - "$MARGUERITE_METEOR_PORT"
+      - $MARGUERITE_METEOR_PORT/tcp
 #     depends_on:
       # - mongo
       # + Depuis utilisation d'un build image custom mongo avec HEALTHCHECK pour le
