@@ -83,6 +83,7 @@ export VERSION_IMAGE_MARGUERITE_STACK_METEOR=$(cat ./.env|grep VERSION_IMAGE_MAR
 export IMAGE_MARGUERITE_IDE_METEOR_PRODUCT_NAME=$(cat ./.env|grep IMAGE_MARGUERITE_IDE_METEOR_PRODUCT_NAME | awk -F = '{print $2}')
 export VERSION_IMAGE_MARGUERITE_IDE_METEOR=$(cat ./.env|grep VERSION_IMAGE_MARGUERITE_IDE_METEOR | awk -F = '{print $2}')
 export WORKSPACE_IDE=$(cat ./.env|grep IN_CONTAINER_WORKSPACE_IDE | awk -F = '{print $2}')
+export NOM_PROJET_MARGUERITE_METEOR==$(cat ./.env|grep NOM_PROJET_MARGUERITE_METEOR | awk -F = '{print $2}')
 
 # Sauf celles-ci, qui sont calculées dans le flot de l'exécution shell
 export ID_IMAGE_MARGUERITE_STACK_METEOR=$IMAGES_MARGUERITE_COMPANY_NAME/$IMAGE_MARGUERITE_STACK_METEOR_PRODUCT_NAME:$VERSION_IMAGE_MARGUERITE_STACK_METEOR
@@ -126,7 +127,7 @@ echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
 # read DEBUGJBLRMI
-docker build -t $ID_IMAGE_MARGUERITE_STACK_METEOR --build-arg WORKSPACE_IDE=$WORKSPACE_IDE -f $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR/Dockerfile $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR
+docker build -t $ID_IMAGE_MARGUERITE_STACK_METEOR --build-arg WORKSPACE_IDE=$WORKSPACE_IDE --build-arg NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR -f $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR/Dockerfile $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR
 # - Je récupère, dans le fichier 'docker-compose.yml', les valeurs de configuration pour le username et le password
 echo "  "
 echo " ---------------------------------------------------------------------- "
