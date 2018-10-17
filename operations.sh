@@ -115,7 +115,7 @@ docker images
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read DEBUGJBL1
+# read DEBUGJBL1
 echo "  "
 echo "  "
 echo "  "
@@ -125,7 +125,7 @@ docker rmi --force $ID_IMAGE_MARGUERITE_IDE_METEOR
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read DEBUGJBLRMI
+# read DEBUGJBLRMI
 docker build -t $ID_IMAGE_MARGUERITE_STACK_METEOR --build-arg WORKSPACE_IDE=$WORKSPACE_IDE -f $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR/Dockerfile $CONTEXTE_DOCKER_BUILD_STACK_MARGUERITE_METEOR
 # - Je récupère, dans le fichier 'docker-compose.yml', les valeurs de configuration pour le username et le password
 echo "  "
@@ -141,7 +141,7 @@ docker images
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read DEBUGJBL2
+# read DEBUGJBL2
 echo "  "
 echo "  "
 echo "  "
@@ -165,7 +165,7 @@ echo "  Mettez éventuellement à jour votre ./initialisation-iaac-cible-deploie
 echo "  Puis pressez la touche entrée pour poursuivre les opérations.  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
-read DEBUGJBL3
+# read DEBUGJBL3
 clear
 
 # - Je rends exéutable les fichiers de script utilisés dans les builds d'images Docker qui doivent l'être : 
@@ -207,8 +207,10 @@ checkHealth $NOM_CONTENEUR_IDE_MARGUERITE
 echo "  "
 echo " ---------------------------------------------------------------------- "
 echo "  "
+clear
 echo " ---------------------------------------------------------------------- "
-echo "   FIN de la provision $ALIAS_INFRA  : "
+echo "   Fin de la provision $ALIAS_INFRA  : "
+echo "   Successfully provisioned $ALIAS_INFRA  : "
 echo " ---------------------------------------------------------------------- "
 # echo "    - \"UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME=$UTILISATEUR_HUBOT_ROCKETCHAT_USERNAME\" "
 echo "  "
@@ -217,6 +219,7 @@ echo "  "
 docker images
 echo "  "
 echo "   Pressez la touche entrée pour terminer la provision. "
+echo "   Pressez enter key to proceed and watch Meteor container's logs. "
 echo " ---------------------------------------------------------------------- "
 echo "  "
 read ATTENTE_INTERACTIVE
