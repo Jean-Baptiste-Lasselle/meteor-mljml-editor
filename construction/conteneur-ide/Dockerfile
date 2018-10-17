@@ -30,6 +30,7 @@ ENV NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
 # WORKDIR $WORKSPACE_IDE
 
 # EXPOSE $MARGUERITE_METEOR_PORT/tcp
+EXPOSE $MARGUERITE_METEOR_PORT/tcp
 # ---- EXECUTION ---- #
 # ++ PRINCIPE : 
 # => NIVEAU IMAGE DE CONTENEUR STACK-METEOR :: On installe NVM, NODEJS, et METEOR, et donc il suffit de changer les variables d'environnement, au docker build, pour changer les versions du stack meteor
