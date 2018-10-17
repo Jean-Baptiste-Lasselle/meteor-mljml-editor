@@ -330,8 +330,9 @@ RUN export PATH=$PATH:$HOME/.meteor && meteor --version
 
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
 RUN echo " Création du projet Meteor [$NOM_PROJET_MARGUERITE_METEOR] :  "
+# cf. https://docs.meteor.com/commandline.html#meteorcreate
 RUN echo " ----------------------------------------------------------------------------------------------------------- "
-RUN export PATH="$PATH:$HOME/.meteor" && echo " VERIF PATH=[$PATH] " && meteor create $NOM_PROJET_MARGUERITE_METEOR
+RUN export PATH="$PATH:$HOME/.meteor" && echo " VERIF PATH=[$PATH] " && meteor create --full $NOM_PROJET_MARGUERITE_METEOR
 
 
 EXPOSE $MARGUERITE_METEOR_PORT/tcp
