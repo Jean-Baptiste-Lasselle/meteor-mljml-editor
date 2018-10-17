@@ -7,7 +7,7 @@ If you snapshot/restore Virtual Machines all over, you might also have problems 
 
 The very point of that recipe, is that is has parameters, which allow you to change (`./.env`), at runtime : 
 
-| -------- | --------------- | ------------- |
+
 | Variable | What it changes | Example value | 
 | -------- | --------------- | ------------- |
 | `NOM_PROJET_MARGUERITE_METEOR` | The meteor project name, like when you `meteor create my-super-project-say-rocketchat` | `bernard-projet-meteor` |
