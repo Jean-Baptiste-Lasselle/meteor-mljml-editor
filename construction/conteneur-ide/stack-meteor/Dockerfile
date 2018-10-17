@@ -350,4 +350,4 @@ RUN ls -all $WORKSPACE_IDE/point-d-entree.sh
 ENTRYPOINT $WORKSPACE_IDE/point-d-entree.sh
 # ENTRYPOINT ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
 # CMD ["meteor", "run", "--port", "$MARGUERITE_METEOR_PORT"]
-CMD ["/bin/bash"]
+CMD ["/bin/sh"]
