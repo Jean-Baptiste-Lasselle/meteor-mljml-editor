@@ -42,6 +42,7 @@ USER root
 # Le [./point-d-entree.sh] sera toujours exécuté avant la 'CMD', et seule la CMD est surchargée par l'invocation [docker exec ... /chemin/dans/conteneur/vers/executable]
 ADD marguerite-healthcheck.sh $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
 RUN chmod a+x $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/marguerite-healthcheck.sh
+RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE
 RUN echo " ----------------------------------- "
 RUN echo " VERIF WORKSPACE_IDE=$WORKSPACE_IDE"
 RUN echo " VERIF NOM_PROJET_MARGUERITE_METEOR=$NOM_PROJET_MARGUERITE_METEOR"
