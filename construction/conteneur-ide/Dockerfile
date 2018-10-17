@@ -54,7 +54,7 @@ RUN echo " ----------------------------------- "
 RUN echo " METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
 RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
 RUN echo " ----------------------------------- "
-RUN exit 2
+# RUN exit 2
 
 
 USER $MARGUERITE_USER_NAME
