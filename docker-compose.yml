@@ -97,7 +97,7 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/:rw
       - ./nginx/logs/:/var/log/nginx/:rw
     ports:
-      - "801:8030"
+      - "$NUM_PORT_ECOUTE_REVERSE_PROXY:8030"
       - "1443:7443"
       - "1222:322"
     expose:
