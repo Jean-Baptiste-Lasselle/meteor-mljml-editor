@@ -41,7 +41,31 @@ MARGUERITE_NODEJS_VERSION=8.12.0
 MARGUERITE_NPM_VERSION=6.4.1
 ```
 
+# lnl
 
+```bash
+Step 20/26 : RUN echo " METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : "
+ ---> Running in 34c5b4724181
+ METEOR - IDE ==>> contenu du répertoire NOM_PROJET_MARGUERITE_METEOR, s'il existe  : 
+Removing intermediate container 34c5b4724181
+ ---> f6ff75ec951c
+Step 21/26 : RUN ls -all $WORKSPACE_IDE/$NOM_PROJET_MARGUERITE_METEOR/
+ ---> Running in 66f5d81814e4
+total 4
+drwxr-xr-x. 1 jbl-devops wheel  39 Oct 17 01:45 .
+drwxr-xr-x. 1 jbl-devops wheel  88 Oct 17 01:45 ..
+-rwxrwxr-x. 1 jbl-devops wheel 590 Oct 17 01:40 marguerite-healthcheck.sh
+Removing intermediate container 66f5d81814e4
+ ---> f247d60f8f8c
+Step 22/26 : RUN echo " ----------------------------------- "
+ ---> Running in 6e5f8be245b6
+ ----------------------------------- 
+Removing intermediate container 6e5f8be245b6
+ ---> 63e8fa32f63b
+Step 23/26 : RUN exit 2
+ ---> Running in 3006a1d01b89
+ERROR: Service 'ide_meteor' failed to build: The command '/bin/sh -c exit 2' returned a non-zero code: 2
+```
 # Utilisation (How to use)
 
 ## Provision et Initialisation du cycle IAAC
