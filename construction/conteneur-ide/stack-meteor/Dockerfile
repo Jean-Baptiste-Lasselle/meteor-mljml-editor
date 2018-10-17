@@ -282,6 +282,8 @@ RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
 USER root
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+# Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
+RUN chown -R $MARGUERITE_USER_NAME:$SUODERS_SYSTEM_GROUP $WORKSPACE_IDE
 USER $MARGUERITE_USER_NAME
 # - NOTA BENE : On remarquera que pour chaque exécution de la commande meteor, nous n'avons jamais besoin de
 # -             préfixer par la commande 'source $NVM_DIR/nvm.sh &&  &&  '
