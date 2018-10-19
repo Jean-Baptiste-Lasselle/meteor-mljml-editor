@@ -20,14 +20,14 @@ The very point of that recipe, is that is has parameters, which allow you to cha
 | `IN_CONTAINER_WORKSPACE_IDE` | The directory, in the container, in which the Meteor project will be created.  | `/marguerite/ide/workspace` |
 | `REPERTOIRE_HOTE_DOCKER_MARGUERITE_IDE` | The directory, on the docker host, to which `$IN_CONTAINER_WORKSPACE_IDE` will be mapped.  | `./marguerite/ide/workspace` |
 | `MARGUERITE_METEOR_PORT` | The port number, inside the docker container, that the meteor app will use on the server side.  | `2000` |
-| `MARGUERITE_METEOR_NODE_OPTIONS` | The value you give to that variable, will be the exact value set for the `NODE_OPTIONS` environement variable, in use at runtime by the **Meteor Framework**.  | `--debug` |
+| `MARGUERITE_METEOR_NODE_OPTIONS` | The value you give to that variable, will be the exact value set for the `NODE_OPTIONS` environement variable, in use at runtime by the **Meteor Framework**.  | `--inspect-brk` |
 | `MARGUERITE_METEOR_VERSION` | Sets and forces to set, the **Meteor Framework**'s version. Has to be semver, prefixes will be infered by provisioning automation.  | `1.8.0` |
 | `MARGUERITE_NVM_VERSION` | Sets and forces to set, **NVM**'s version. Has to be semver, prefixes will be infered by provisioning automation. | `0.33.10` |
 | `MARGUERITE_NODEJS_VERSION` | Sets and forces to set, the **NodeJS**' version. Has to be semver, prefixes will be infered by provisioning automation. | `8.12.0` |
 | `MARGUERITE_NPM_VERSION` | Sets and forces to set, the **NPM**'s version. Has to be semver, prefixes will be infered by provisioning automation.  | `6.4.1` |
 
   **Important Update** 
-  A few days after I wrote this README.md (worte that in 2/3 days), I learned more about Meteor, And I now can update you with something the following :  Meteor bundles its own nodejs / npm in its own releases, so that YOU DONT  have to install either nvm, nodejs , or npm at all, before installing Meteor framework, and using it. This means taht currently, the docker container you will build with this recipe, will unlawfully include NVM / NODEJS and NPM, alongside Meteor itself, and its embedded nodejs and npm. This [I will of course fix asap](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/issues/3). 
+  A few days after I wrote this README.md (wrote that in 2/3 days), I learned more about Meteor, And I now can update you with something the following :  Meteor bundles its own nodejs / npm in its own releases, so that YOU DONT  have to install either nvm, nodejs , or npm at all, before installing Meteor framework, and using it. This means taht currently, the docker container you will build with this recipe, will unlawfully include NVM / NODEJS and NPM, alongside Meteor itself, and its embedded nodejs and npm. This [I will of course fix asap](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/issues/3). 
 > `./.env`
 ```yaml
 NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
