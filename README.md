@@ -27,7 +27,7 @@ The very point of that recipe, is that is has parameters, which allow you to cha
 | `MARGUERITE_NPM_VERSION` | Sets and forces to set, the **NPM**'s version. Has to be semver, prefixes will be infered by provisioning automation.  | `6.4.1` |
 
   **Important Update** 
-  A few days after I wrote this README.md (wrote that in 2/3 days), I learned more about Meteor, And I now can update you with something, the following :  Meteor bundles its own nodejs / npm in its own releases, so that YOU DONT  have to install either nvm, nodejs , or npm at all, before installing Meteor framework, and using it. This means taht currently, the docker container you will build with this recipe, will unlawfully include NVM / NODEJS and NPM, alongside Meteor itself, and its embedded nodejs and npm. This [I will of course fix asap](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/issues/3). 
+  A few days after I wrote this README.md (wrote that in 2/3 days), I learned more about Meteor, And I now can update you with something, the following :  Meteor bundles its own nodejs / npm in its own releases, so that YOU DONT  have to install either nvm, nodejs , or npm at all, before installing Meteor framework, and using it. This means that currently, the docker container you will build with this recipe, will unlawfully include NVM / NODEJS and NPM, alongside Meteor itself, and its embedded nodejs and npm. This [I will of course fix asap](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/issues/3). 
 > `./.env`
 ```yaml
 NOM_PROJET_MARGUERITE_METEOR=jbl-projet-meteor
