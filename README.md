@@ -71,10 +71,10 @@ Which will allow you to access your Meteor IDE using a neat domaine name network
 * exécuter cette recette une première fois (execute this recipe for the first time) : 
 
 ```bash
-export PROVISIONING_HOME=$HOME/marguerite
+export PROVISIONING_HOME=$HOME/pegasus
 mkdir -p $PROVISIONING_HOME
 cd $PROVISIONING_HOME
-git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . 
+git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-mljml-editor/" . 
 chmod +x ./operations.sh
 ./operations.sh
 ```
