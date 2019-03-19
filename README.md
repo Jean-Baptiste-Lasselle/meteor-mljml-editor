@@ -55,6 +55,7 @@ MARGUERITE_NPM_VERSION=6.4.1
 ### Provision initiale
 
 * On the machine you installed Docker, the "_Docker Host_", add to your /etc/hosts, the following entries : 
+
 ```bash
 # Infra Marguerite / Meteor
 # Marguerite's primary Docker Host Worker 
@@ -83,6 +84,9 @@ _Soit, en une seule ligne (How to execute this recipe for the first time "all-in
 ```bash
 export PROVISIONING_HOME=$HOME/marguerite && mkdir -p $PROVISIONING_HOME && cd $PROVISIONING_HOME && git clone "https://github.com/Jean-Baptiste-Lasselle/meteor-lessons" . && chmod +x ./operations.sh && ./operations.sh
 ```
+
+Lorsque l'application a terminé son démarrage, elle est accessible à l'URL `http://$NOM_HOTE_RESEAU:801/`
+
 ### Accessing the new Meteor App
 
 Lorsque la recette est terminée, l'application meteor générée est accessible via l'URL :
