@@ -1,4 +1,4 @@
-
+This repo provides you with a recipe to provision a meteorized version of https://github.com/Jean-Baptiste-Lasselle/provision-mjml-server, that is a Web browser MJML editor, served a an SPA, in a `MeteorJS` context.
 
 # Objet de ce repo (purpose)
 
