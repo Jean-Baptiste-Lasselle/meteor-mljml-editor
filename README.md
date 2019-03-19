@@ -68,7 +68,7 @@ Which will allow you to access your Meteor IDE using a neat domaine name network
 
 ![The brand new Fully fledged Meteor App accessed with domain name](https://github.com/Jean-Baptiste-Lasselle/meteor-lessons/raw/master/documentation/images/the-brand-new-meteor-app-2.png)
 
-* exécuter cette recette une première fois (execute this recipe for the first time) : 
+* exécutez la recette ci-dessous une première fois (execute this recipe for the first time) : 
 
 ```bash
 export PROVISIONING_HOME=$HOME/pegasus
