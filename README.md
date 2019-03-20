@@ -5,7 +5,7 @@ This repo provides you with a recipe to provision a meteorized version of https:
 A word for the English speaking reader : THe work on this repo is in progress (March 20 2019), and is based on https://github.com/Jean-Baptiste-Lasselle/meteor-lessons , which is why you will find rrefrences to the later, in here.
 
 
-# Objet de ce repo (purpose)
+# Meteor Stack underlay
 
 This repo brings you a provisioning recipe, for a container embedding a [Meteor Framework](https://www.meteor.com/) runtime.
 It has been tested on a CentOS 7 system, with Docker and Docker compose installed on it.
